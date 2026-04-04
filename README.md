@@ -165,35 +165,33 @@ The difference is architecture. Llama uses vanilla transformers where each layer
 
 Replication script: [`super_weight_g4.py`](https://github.com/seanpattencode/aicombo/blob/main/super_weight_g4.py)
 
-## 10. Concept-Selective Neurons Found via Weight Ablation
+## 10. Selective Degradation via Weight Ablation
 
-Anthropic identified concept-specific features in Claude 3 Sonnet using sparse autoencoders on internal activations ([Golden Gate Claude, May 2024](https://www.anthropic.com/news/golden-gate-claude)). We replicated this on Gemma 4 E4B using a different method: systematic weight ablation through the GGUF, requiring no activation access and no SAE training.
+Anthropic identified concept-specific features in Claude 3 Sonnet using sparse autoencoders on internal activations ([Golden Gate Claude, May 2024](https://www.anthropic.com/news/golden-gate-claude)). We tested whether similar selective effects can be observed through weight ablation on quantized GGUF files, requiring no activation access and no SAE training.
 
-**Method**: Binary search — zero progressively smaller chunks of rows in `ffn_gate.weight`, test which concepts survive and which die. Narrow down until the minimal set of concept-encoding rows is identified.
+**Method**: Zero progressively smaller chunks of rows in `ffn_gate.weight`, test degradation across 20 addition problems, 20 multiplication problems, same-number controls (7+8 vs 7×8), and cross-layer checks.
 
-**Results in blk.20.ffn_gate.weight** (middle layer, 2560 rows):
+**Results**: zeroing rows 1280-1344 (64 of 2560) in blk.20.ffn_gate.weight:
 
-| Rows zeroed | Math (7×8) | Math (100+200) | Math (12²) | Eiffel Tower | Mercury | Code (print) |
-|---|---|---|---|---|---|---|
-| None (baseline) | 56 | 300 | 144 | Paris | Mercury | 4 |
-| 1280-1344 (64 rows) | 56 | **DEAD** | 144 | **DEAD** | **DEAD** | 4 |
-| 1344-1408 (64 rows) | 56 | 300 | 144 | **DEAD** | Mercury | 4 |
-| 1408-1472 (64 rows) | 56 | 300 | 144 | **DEAD** | Mercury | 4 |
-| 1472-1536 (64 rows) | 56 | 300 | 144 | **DEAD** | Mercury | 4 |
+| Category | Baseline | After ablation | Change |
+|---|---|---|---|
+| Addition (20 problems) | 18/20 | 11/20 | **-39%** |
+| Multiplication (20 problems) | 20/20 | 19/20 | -5% |
+| Same-number addition (7+8, 12+12, etc.) | 4/4 | 3/4 | -25% |
+| Same-number multiplication (7×8, 12×12, etc.) | 4/4 | 4/4 | 0% |
 
-**Key findings**:
+**Controls**:
+- Rows 0-64 (different rows, same layer): addition 18/20, multiplication 20/20 — no effect. The degradation is specific to rows 1280-1344.
+- Rows 1280-1344 in blk.15 and blk.25 (same rows, different layers): addition 18/20, multiplication 20/20 — no effect. The degradation is specific to blk.20.
+- Geography probes were unreliable at baseline (1/5 with `think:false`) and cannot support conclusions.
 
-1. **Different math operations use different neurons.** Multiplication (7×8=56, 12²=144) and addition (100+200=300) are stored in different row groups. Zeroing rows 1280-1344 kills addition but leaves multiplication intact. This is not "math neurons" — it's operation-specific neurons.
+**What we can say**: zeroing 64 specific rows in a specific layer preferentially degrades addition (~39%) over multiplication (~5%). The effect is layer-specific and row-specific — control ablations in other rows or layers show no degradation. This is consistent with different computational pathways for different arithmetic operations, though the degradation is partial (11/20 addition still works), not a clean on/off switch.
 
-2. **Geography concepts are distributed.** The Eiffel Tower / Paris concept is spread across rows 1280-1536 (256 rows, 10% of the tensor). Any 64-row chunk in this range kills it. Mercury (planet) is more localized — only dies when rows 1280-1344 are hit.
+**What we cannot say**: these rows "encode addition." The partial degradation suggests these rows participate in some addition-relevant computation but are not the sole locus. The effect could reflect disrupted routing rather than erased knowledge. A proper feature identification would require activation-level analysis (sparse autoencoders) rather than weight ablation alone.
 
-3. **Code execution is independent.** `print(2+2)` outputs "4" survives all ablations. Code knowledge is encoded in different rows than math or geography.
+**Methodological contribution**: weight ablation through GGUF modification via ollama is a viable, accessible method for identifying rows that preferentially affect specific capabilities. It works on any locally-run model with no special tooling beyond the ability to modify and reload weights.
 
-4. **64 rows (2.5%) is sufficient for selective ablation.** This is the granularity at which concept-specific effects emerge in the Q4_K quantized model.
-
-This demonstrates that Anthropic's core finding — concepts are stored in identifiable, manipulable neuron groups — holds for open-weight models and can be discovered through weight ablation alone, without access to internal activations. The method works directly on quantized GGUF files through ollama, making it accessible to anyone with a local model.
-
-Replication scripts: [`concept_ablation.py`](https://github.com/seanpattencode/aicombo/blob/main/concept_ablation.py), [`concept_ablation2.py`](https://github.com/seanpattencode/aicombo/blob/main/concept_ablation2.py)
+Scripts: [`concept_ablation.py`](https://github.com/seanpattencode/aicombo/blob/main/concept_ablation.py), [`concept_ablation2.py`](https://github.com/seanpattencode/aicombo/blob/main/concept_ablation2.py), [`concept_ablation3.py`](https://github.com/seanpattencode/aicombo/blob/main/concept_ablation3.py)
 
 ## What Standard Tools Miss
 
