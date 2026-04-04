@@ -1,0 +1,1208 @@
+/* GGUF v3: 1014 tensors, 52 metadata */
+
+/* Metadata:
+ *  gemma4.attention.head_count = 16
+ *  gemma4.attention.head_count_kv = [30]
+ *  gemma4.attention.key_length = 512
+ *  gemma4.attention.key_length_swa = 256
+ *  gemma4.attention.layer_norm_rms_epsilon = 1e-06
+ *  gemma4.attention.shared_kv_layers = 0
+ *  gemma4.attention.sliding_window = 1024
+ *  gemma4.attention.sliding_window_pattern = [30]
+ *  gemma4.attention.value_length = 512
+ *  gemma4.attention.value_length_swa = 256
+ *  gemma4.block_count = 30
+ *  gemma4.context_length = 262144
+ *  gemma4.embedding_length = 2816
+ *  gemma4.embedding_length_per_layer_input = 0
+ *  gemma4.expert_count = 128
+ *  gemma4.expert_feed_forward_length = 704
+ *  gemma4.expert_used_count = 8
+ *  gemma4.feed_forward_length = 2112
+ *  gemma4.final_logit_softcapping = 30
+ *  gemma4.rope.dimension_count = 512
+ *  gemma4.rope.dimension_count_swa = 256
+ *  gemma4.rope.freq_base = 1e+06
+ *  gemma4.rope.freq_base_swa = 10000
+ *  gemma4.vision.attention.head_count = 16
+ *  gemma4.vision.attention.layer_norm_epsilon = 1e-06
+ *  gemma4.vision.block_count = 27
+ *  gemma4.vision.embedding_length = 1152
+ *  gemma4.vision.feed_forward_length = 4304
+ *  gemma4.vision.num_channels = 3
+ *  gemma4.vision.patch_size = 16
+ *  gemma4.vision.projector.scale_factor = 3
+ *  general.architecture = "gemma4"
+ *  general.file_type = 15
+ *  general.parameter_count = 25805936462
+ *  general.quantization_version = 2
+ *  tokenizer.ggml.add_bos_token = false
+ *  tokenizer.ggml.add_eos_token = false
+ *  tokenizer.ggml.add_mask_token = false
+ *  tokenizer.ggml.add_padding_token = false
+ *  tokenizer.ggml.add_unknown_token = false
+ *  tokenizer.ggml.bos_token_id = 2
+ *  tokenizer.ggml.eos_token_id = 1
+ *  tokenizer.ggml.eos_token_ids = [3]
+ *  tokenizer.ggml.mask_token_id = 4
+ *  tokenizer.ggml.merges = [514906]
+ *  tokenizer.ggml.model = "llama"
+ *  tokenizer.ggml.padding_token_id = 0
+ *  tokenizer.ggml.pre = "gemma4"
+ *  tokenizer.ggml.scores = [262144]
+ *  tokenizer.ggml.token_type = [262144]
+ *  tokenizer.ggml.tokens = [262144]
+ *  tokenizer.ggml.unknown_token_id = 3
+ */
+
+/* Tensors:
+ *  [  0] blk.0.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [  1] blk.0.attn_k_norm.weight  256  F32  256 el
+ *  [  2] blk.0.attn_norm.weight  2816  F32  2816 el
+ *  [  3] blk.0.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [  4] blk.0.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [  5] blk.0.attn_q_norm.weight  256  F32  256 el
+ *  [  6] blk.0.attn_v.weight  2816x2048  Q6_K  5767168 el
+ *  [  7] blk.0.ffn_down.weight  2112x2816  Q8_0  5947392 el
+ *  [  8] blk.0.ffn_down_exps.scale  128  F32  128 el
+ *  [  9] blk.0.ffn_down_exps.weight  704x2816x128  Q8_0  253755392 el
+ *  [ 10] blk.0.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [ 11] blk.0.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [ 12] blk.0.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [ 13] blk.0.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [ 14] blk.0.ffn_norm.weight  2816  F32  2816 el
+ *  [ 15] blk.0.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [ 16] blk.0.layer_output_scale.weight  1  F32  1 el
+ *  [ 17] blk.0.post_attention_norm.weight  2816  F32  2816 el
+ *  [ 18] blk.0.post_ffw_norm.weight  2816  F32  2816 el
+ *  [ 19] blk.0.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [ 20] blk.0.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [ 21] blk.0.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [ 22] blk.1.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [ 23] blk.1.attn_k_norm.weight  256  F32  256 el
+ *  [ 24] blk.1.attn_norm.weight  2816  F32  2816 el
+ *  [ 25] blk.1.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [ 26] blk.1.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [ 27] blk.1.attn_q_norm.weight  256  F32  256 el
+ *  [ 28] blk.1.attn_v.weight  2816x2048  Q6_K  5767168 el
+ *  [ 29] blk.1.ffn_down.weight  2112x2816  Q8_0  5947392 el
+ *  [ 30] blk.1.ffn_down_exps.scale  128  F32  128 el
+ *  [ 31] blk.1.ffn_down_exps.weight  704x2816x128  Q8_0  253755392 el
+ *  [ 32] blk.1.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [ 33] blk.1.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [ 34] blk.1.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [ 35] blk.1.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [ 36] blk.1.ffn_norm.weight  2816  F32  2816 el
+ *  [ 37] blk.1.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [ 38] blk.1.layer_output_scale.weight  1  F32  1 el
+ *  [ 39] blk.1.post_attention_norm.weight  2816  F32  2816 el
+ *  [ 40] blk.1.post_ffw_norm.weight  2816  F32  2816 el
+ *  [ 41] blk.1.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [ 42] blk.1.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [ 43] blk.1.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [ 44] blk.2.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [ 45] blk.2.attn_k_norm.weight  256  F32  256 el
+ *  [ 46] blk.2.attn_norm.weight  2816  F32  2816 el
+ *  [ 47] blk.2.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [ 48] blk.2.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [ 49] blk.2.attn_q_norm.weight  256  F32  256 el
+ *  [ 50] blk.2.attn_v.weight  2816x2048  Q6_K  5767168 el
+ *  [ 51] blk.2.ffn_down.weight  2112x2816  Q8_0  5947392 el
+ *  [ 52] blk.2.ffn_down_exps.scale  128  F32  128 el
+ *  [ 53] blk.2.ffn_down_exps.weight  704x2816x128  Q8_0  253755392 el
+ *  [ 54] blk.2.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [ 55] blk.2.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [ 56] blk.2.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [ 57] blk.2.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [ 58] blk.2.ffn_norm.weight  2816  F32  2816 el
+ *  [ 59] blk.2.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [ 60] blk.2.layer_output_scale.weight  1  F32  1 el
+ *  [ 61] blk.2.post_attention_norm.weight  2816  F32  2816 el
+ *  [ 62] blk.2.post_ffw_norm.weight  2816  F32  2816 el
+ *  [ 63] blk.2.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [ 64] blk.2.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [ 65] blk.2.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [ 66] blk.3.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [ 67] blk.3.attn_k_norm.weight  256  F32  256 el
+ *  [ 68] blk.3.attn_norm.weight  2816  F32  2816 el
+ *  [ 69] blk.3.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [ 70] blk.3.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [ 71] blk.3.attn_q_norm.weight  256  F32  256 el
+ *  [ 72] blk.3.attn_v.weight  2816x2048  Q6_K  5767168 el
+ *  [ 73] blk.3.ffn_down.weight  2112x2816  Q5_0  5947392 el
+ *  [ 74] blk.3.ffn_down_exps.scale  128  F32  128 el
+ *  [ 75] blk.3.ffn_down_exps.weight  704x2816x128  Q5_0  253755392 el
+ *  [ 76] blk.3.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [ 77] blk.3.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [ 78] blk.3.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [ 79] blk.3.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [ 80] blk.3.ffn_norm.weight  2816  F32  2816 el
+ *  [ 81] blk.3.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [ 82] blk.3.layer_output_scale.weight  1  F32  1 el
+ *  [ 83] blk.3.post_attention_norm.weight  2816  F32  2816 el
+ *  [ 84] blk.3.post_ffw_norm.weight  2816  F32  2816 el
+ *  [ 85] blk.3.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [ 86] blk.3.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [ 87] blk.3.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [ 88] blk.4.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [ 89] blk.4.attn_k_norm.weight  256  F32  256 el
+ *  [ 90] blk.4.attn_norm.weight  2816  F32  2816 el
+ *  [ 91] blk.4.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [ 92] blk.4.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [ 93] blk.4.attn_q_norm.weight  256  F32  256 el
+ *  [ 94] blk.4.attn_v.weight  2816x2048  Q6_K  5767168 el
+ *  [ 95] blk.4.ffn_down.weight  2112x2816  Q5_0  5947392 el
+ *  [ 96] blk.4.ffn_down_exps.scale  128  F32  128 el
+ *  [ 97] blk.4.ffn_down_exps.weight  704x2816x128  Q5_0  253755392 el
+ *  [ 98] blk.4.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [ 99] blk.4.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [100] blk.4.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [101] blk.4.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [102] blk.4.ffn_norm.weight  2816  F32  2816 el
+ *  [103] blk.4.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [104] blk.4.layer_output_scale.weight  1  F32  1 el
+ *  [105] blk.4.post_attention_norm.weight  2816  F32  2816 el
+ *  [106] blk.4.post_ffw_norm.weight  2816  F32  2816 el
+ *  [107] blk.4.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [108] blk.4.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [109] blk.4.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [110] blk.5.attn_k.weight  2816x1024  Q4_K  2883584 el
+ *  [111] blk.5.attn_k_norm.weight  512  F32  512 el
+ *  [112] blk.5.attn_norm.weight  2816  F32  2816 el
+ *  [113] blk.5.attn_output.weight  8192x2816  Q4_K  23068672 el
+ *  [114] blk.5.attn_q.weight  2816x8192  Q4_K  23068672 el
+ *  [115] blk.5.attn_q_norm.weight  512  F32  512 el
+ *  [116] blk.5.ffn_down.weight  2112x2816  Q8_0  5947392 el
+ *  [117] blk.5.ffn_down_exps.scale  128  F32  128 el
+ *  [118] blk.5.ffn_down_exps.weight  704x2816x128  Q8_0  253755392 el
+ *  [119] blk.5.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [120] blk.5.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [121] blk.5.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [122] blk.5.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [123] blk.5.ffn_norm.weight  2816  F32  2816 el
+ *  [124] blk.5.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [125] blk.5.layer_output_scale.weight  1  F32  1 el
+ *  [126] blk.5.post_attention_norm.weight  2816  F32  2816 el
+ *  [127] blk.5.post_ffw_norm.weight  2816  F32  2816 el
+ *  [128] blk.5.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [129] blk.5.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [130] blk.5.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [131] blk.6.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [132] blk.6.attn_k_norm.weight  256  F32  256 el
+ *  [133] blk.6.attn_norm.weight  2816  F32  2816 el
+ *  [134] blk.6.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [135] blk.6.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [136] blk.6.attn_q_norm.weight  256  F32  256 el
+ *  [137] blk.6.attn_v.weight  2816x2048  Q6_K  5767168 el
+ *  [138] blk.6.ffn_down.weight  2112x2816  Q5_0  5947392 el
+ *  [139] blk.6.ffn_down_exps.scale  128  F32  128 el
+ *  [140] blk.6.ffn_down_exps.weight  704x2816x128  Q5_0  253755392 el
+ *  [141] blk.6.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [142] blk.6.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [143] blk.6.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [144] blk.6.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [145] blk.6.ffn_norm.weight  2816  F32  2816 el
+ *  [146] blk.6.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [147] blk.6.layer_output_scale.weight  1  F32  1 el
+ *  [148] blk.6.post_attention_norm.weight  2816  F32  2816 el
+ *  [149] blk.6.post_ffw_norm.weight  2816  F32  2816 el
+ *  [150] blk.6.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [151] blk.6.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [152] blk.6.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [153] blk.7.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [154] blk.7.attn_k_norm.weight  256  F32  256 el
+ *  [155] blk.7.attn_norm.weight  2816  F32  2816 el
+ *  [156] blk.7.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [157] blk.7.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [158] blk.7.attn_q_norm.weight  256  F32  256 el
+ *  [159] blk.7.attn_v.weight  2816x2048  Q4_K  5767168 el
+ *  [160] blk.7.ffn_down.weight  2112x2816  Q5_0  5947392 el
+ *  [161] blk.7.ffn_down_exps.scale  128  F32  128 el
+ *  [162] blk.7.ffn_down_exps.weight  704x2816x128  Q5_0  253755392 el
+ *  [163] blk.7.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [164] blk.7.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [165] blk.7.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [166] blk.7.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [167] blk.7.ffn_norm.weight  2816  F32  2816 el
+ *  [168] blk.7.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [169] blk.7.layer_output_scale.weight  1  F32  1 el
+ *  [170] blk.7.post_attention_norm.weight  2816  F32  2816 el
+ *  [171] blk.7.post_ffw_norm.weight  2816  F32  2816 el
+ *  [172] blk.7.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [173] blk.7.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [174] blk.7.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [175] blk.8.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [176] blk.8.attn_k_norm.weight  256  F32  256 el
+ *  [177] blk.8.attn_norm.weight  2816  F32  2816 el
+ *  [178] blk.8.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [179] blk.8.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [180] blk.8.attn_q_norm.weight  256  F32  256 el
+ *  [181] blk.8.attn_v.weight  2816x2048  Q4_K  5767168 el
+ *  [182] blk.8.ffn_down.weight  2112x2816  Q8_0  5947392 el
+ *  [183] blk.8.ffn_down_exps.scale  128  F32  128 el
+ *  [184] blk.8.ffn_down_exps.weight  704x2816x128  Q8_0  253755392 el
+ *  [185] blk.8.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [186] blk.8.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [187] blk.8.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [188] blk.8.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [189] blk.8.ffn_norm.weight  2816  F32  2816 el
+ *  [190] blk.8.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [191] blk.8.layer_output_scale.weight  1  F32  1 el
+ *  [192] blk.8.post_attention_norm.weight  2816  F32  2816 el
+ *  [193] blk.8.post_ffw_norm.weight  2816  F32  2816 el
+ *  [194] blk.8.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [195] blk.8.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [196] blk.8.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [197] blk.9.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [198] blk.9.attn_k_norm.weight  256  F32  256 el
+ *  [199] blk.9.attn_norm.weight  2816  F32  2816 el
+ *  [200] blk.9.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [201] blk.9.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [202] blk.9.attn_q_norm.weight  256  F32  256 el
+ *  [203] blk.9.attn_v.weight  2816x2048  Q6_K  5767168 el
+ *  [204] blk.9.ffn_down.weight  2112x2816  Q5_0  5947392 el
+ *  [205] blk.9.ffn_down_exps.scale  128  F32  128 el
+ *  [206] blk.9.ffn_down_exps.weight  704x2816x128  Q5_0  253755392 el
+ *  [207] blk.9.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [208] blk.9.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [209] blk.9.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [210] blk.9.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [211] blk.9.ffn_norm.weight  2816  F32  2816 el
+ *  [212] blk.9.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [213] blk.9.layer_output_scale.weight  1  F32  1 el
+ *  [214] blk.9.post_attention_norm.weight  2816  F32  2816 el
+ *  [215] blk.9.post_ffw_norm.weight  2816  F32  2816 el
+ *  [216] blk.9.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [217] blk.9.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [218] blk.9.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [219] blk.10.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [220] blk.10.attn_k_norm.weight  256  F32  256 el
+ *  [221] blk.10.attn_norm.weight  2816  F32  2816 el
+ *  [222] blk.10.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [223] blk.10.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [224] blk.10.attn_q_norm.weight  256  F32  256 el
+ *  [225] blk.10.attn_v.weight  2816x2048  Q4_K  5767168 el
+ *  [226] blk.10.ffn_down.weight  2112x2816  Q5_0  5947392 el
+ *  [227] blk.10.ffn_down_exps.scale  128  F32  128 el
+ *  [228] blk.10.ffn_down_exps.weight  704x2816x128  Q5_0  253755392 el
+ *  [229] blk.10.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [230] blk.10.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [231] blk.10.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [232] blk.10.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [233] blk.10.ffn_norm.weight  2816  F32  2816 el
+ *  [234] blk.10.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [235] blk.10.layer_output_scale.weight  1  F32  1 el
+ *  [236] blk.10.post_attention_norm.weight  2816  F32  2816 el
+ *  [237] blk.10.post_ffw_norm.weight  2816  F32  2816 el
+ *  [238] blk.10.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [239] blk.10.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [240] blk.10.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [241] blk.11.attn_k.weight  2816x1024  Q4_K  2883584 el
+ *  [242] blk.11.attn_k_norm.weight  512  F32  512 el
+ *  [243] blk.11.attn_norm.weight  2816  F32  2816 el
+ *  [244] blk.11.attn_output.weight  8192x2816  Q4_K  23068672 el
+ *  [245] blk.11.attn_q.weight  2816x8192  Q4_K  23068672 el
+ *  [246] blk.11.attn_q_norm.weight  512  F32  512 el
+ *  [247] blk.11.ffn_down.weight  2112x2816  Q8_0  5947392 el
+ *  [248] blk.11.ffn_down_exps.scale  128  F32  128 el
+ *  [249] blk.11.ffn_down_exps.weight  704x2816x128  Q8_0  253755392 el
+ *  [250] blk.11.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [251] blk.11.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [252] blk.11.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [253] blk.11.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [254] blk.11.ffn_norm.weight  2816  F32  2816 el
+ *  [255] blk.11.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [256] blk.11.layer_output_scale.weight  1  F32  1 el
+ *  [257] blk.11.post_attention_norm.weight  2816  F32  2816 el
+ *  [258] blk.11.post_ffw_norm.weight  2816  F32  2816 el
+ *  [259] blk.11.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [260] blk.11.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [261] blk.11.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [262] blk.12.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [263] blk.12.attn_k_norm.weight  256  F32  256 el
+ *  [264] blk.12.attn_norm.weight  2816  F32  2816 el
+ *  [265] blk.12.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [266] blk.12.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [267] blk.12.attn_q_norm.weight  256  F32  256 el
+ *  [268] blk.12.attn_v.weight  2816x2048  Q4_K  5767168 el
+ *  [269] blk.12.ffn_down.weight  2112x2816  Q5_0  5947392 el
+ *  [270] blk.12.ffn_down_exps.scale  128  F32  128 el
+ *  [271] blk.12.ffn_down_exps.weight  704x2816x128  Q5_0  253755392 el
+ *  [272] blk.12.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [273] blk.12.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [274] blk.12.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [275] blk.12.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [276] blk.12.ffn_norm.weight  2816  F32  2816 el
+ *  [277] blk.12.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [278] blk.12.layer_output_scale.weight  1  F32  1 el
+ *  [279] blk.12.post_attention_norm.weight  2816  F32  2816 el
+ *  [280] blk.12.post_ffw_norm.weight  2816  F32  2816 el
+ *  [281] blk.12.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [282] blk.12.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [283] blk.12.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [284] blk.13.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [285] blk.13.attn_k_norm.weight  256  F32  256 el
+ *  [286] blk.13.attn_norm.weight  2816  F32  2816 el
+ *  [287] blk.13.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [288] blk.13.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [289] blk.13.attn_q_norm.weight  256  F32  256 el
+ *  [290] blk.13.attn_v.weight  2816x2048  Q6_K  5767168 el
+ *  [291] blk.13.ffn_down.weight  2112x2816  Q5_0  5947392 el
+ *  [292] blk.13.ffn_down_exps.scale  128  F32  128 el
+ *  [293] blk.13.ffn_down_exps.weight  704x2816x128  Q5_0  253755392 el
+ *  [294] blk.13.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [295] blk.13.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [296] blk.13.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [297] blk.13.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [298] blk.13.ffn_norm.weight  2816  F32  2816 el
+ *  [299] blk.13.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [300] blk.13.layer_output_scale.weight  1  F32  1 el
+ *  [301] blk.13.post_attention_norm.weight  2816  F32  2816 el
+ *  [302] blk.13.post_ffw_norm.weight  2816  F32  2816 el
+ *  [303] blk.13.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [304] blk.13.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [305] blk.13.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [306] blk.14.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [307] blk.14.attn_k_norm.weight  256  F32  256 el
+ *  [308] blk.14.attn_norm.weight  2816  F32  2816 el
+ *  [309] blk.14.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [310] blk.14.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [311] blk.14.attn_q_norm.weight  256  F32  256 el
+ *  [312] blk.14.attn_v.weight  2816x2048  Q4_K  5767168 el
+ *  [313] blk.14.ffn_down.weight  2112x2816  Q8_0  5947392 el
+ *  [314] blk.14.ffn_down_exps.scale  128  F32  128 el
+ *  [315] blk.14.ffn_down_exps.weight  704x2816x128  Q8_0  253755392 el
+ *  [316] blk.14.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [317] blk.14.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [318] blk.14.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [319] blk.14.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [320] blk.14.ffn_norm.weight  2816  F32  2816 el
+ *  [321] blk.14.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [322] blk.14.layer_output_scale.weight  1  F32  1 el
+ *  [323] blk.14.post_attention_norm.weight  2816  F32  2816 el
+ *  [324] blk.14.post_ffw_norm.weight  2816  F32  2816 el
+ *  [325] blk.14.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [326] blk.14.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [327] blk.14.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [328] blk.15.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [329] blk.15.attn_k_norm.weight  256  F32  256 el
+ *  [330] blk.15.attn_norm.weight  2816  F32  2816 el
+ *  [331] blk.15.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [332] blk.15.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [333] blk.15.attn_q_norm.weight  256  F32  256 el
+ *  [334] blk.15.attn_v.weight  2816x2048  Q4_K  5767168 el
+ *  [335] blk.15.ffn_down.weight  2112x2816  Q5_0  5947392 el
+ *  [336] blk.15.ffn_down_exps.scale  128  F32  128 el
+ *  [337] blk.15.ffn_down_exps.weight  704x2816x128  Q5_0  253755392 el
+ *  [338] blk.15.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [339] blk.15.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [340] blk.15.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [341] blk.15.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [342] blk.15.ffn_norm.weight  2816  F32  2816 el
+ *  [343] blk.15.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [344] blk.15.layer_output_scale.weight  1  F32  1 el
+ *  [345] blk.15.post_attention_norm.weight  2816  F32  2816 el
+ *  [346] blk.15.post_ffw_norm.weight  2816  F32  2816 el
+ *  [347] blk.15.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [348] blk.15.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [349] blk.15.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [350] blk.16.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [351] blk.16.attn_k_norm.weight  256  F32  256 el
+ *  [352] blk.16.attn_norm.weight  2816  F32  2816 el
+ *  [353] blk.16.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [354] blk.16.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [355] blk.16.attn_q_norm.weight  256  F32  256 el
+ *  [356] blk.16.attn_v.weight  2816x2048  Q6_K  5767168 el
+ *  [357] blk.16.ffn_down.weight  2112x2816  Q5_0  5947392 el
+ *  [358] blk.16.ffn_down_exps.scale  128  F32  128 el
+ *  [359] blk.16.ffn_down_exps.weight  704x2816x128  Q5_0  253755392 el
+ *  [360] blk.16.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [361] blk.16.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [362] blk.16.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [363] blk.16.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [364] blk.16.ffn_norm.weight  2816  F32  2816 el
+ *  [365] blk.16.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [366] blk.16.layer_output_scale.weight  1  F32  1 el
+ *  [367] blk.16.post_attention_norm.weight  2816  F32  2816 el
+ *  [368] blk.16.post_ffw_norm.weight  2816  F32  2816 el
+ *  [369] blk.16.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [370] blk.16.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [371] blk.16.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [372] blk.17.attn_k.weight  2816x1024  Q4_K  2883584 el
+ *  [373] blk.17.attn_k_norm.weight  512  F32  512 el
+ *  [374] blk.17.attn_norm.weight  2816  F32  2816 el
+ *  [375] blk.17.attn_output.weight  8192x2816  Q4_K  23068672 el
+ *  [376] blk.17.attn_q.weight  2816x8192  Q4_K  23068672 el
+ *  [377] blk.17.attn_q_norm.weight  512  F32  512 el
+ *  [378] blk.17.ffn_down.weight  2112x2816  Q8_0  5947392 el
+ *  [379] blk.17.ffn_down_exps.scale  128  F32  128 el
+ *  [380] blk.17.ffn_down_exps.weight  704x2816x128  Q8_0  253755392 el
+ *  [381] blk.17.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [382] blk.17.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [383] blk.17.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [384] blk.17.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [385] blk.17.ffn_norm.weight  2816  F32  2816 el
+ *  [386] blk.17.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [387] blk.17.layer_output_scale.weight  1  F32  1 el
+ *  [388] blk.17.post_attention_norm.weight  2816  F32  2816 el
+ *  [389] blk.17.post_ffw_norm.weight  2816  F32  2816 el
+ *  [390] blk.17.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [391] blk.17.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [392] blk.17.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [393] blk.18.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [394] blk.18.attn_k_norm.weight  256  F32  256 el
+ *  [395] blk.18.attn_norm.weight  2816  F32  2816 el
+ *  [396] blk.18.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [397] blk.18.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [398] blk.18.attn_q_norm.weight  256  F32  256 el
+ *  [399] blk.18.attn_v.weight  2816x2048  Q4_K  5767168 el
+ *  [400] blk.18.ffn_down.weight  2112x2816  Q5_0  5947392 el
+ *  [401] blk.18.ffn_down_exps.scale  128  F32  128 el
+ *  [402] blk.18.ffn_down_exps.weight  704x2816x128  Q5_0  253755392 el
+ *  [403] blk.18.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [404] blk.18.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [405] blk.18.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [406] blk.18.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [407] blk.18.ffn_norm.weight  2816  F32  2816 el
+ *  [408] blk.18.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [409] blk.18.layer_output_scale.weight  1  F32  1 el
+ *  [410] blk.18.post_attention_norm.weight  2816  F32  2816 el
+ *  [411] blk.18.post_ffw_norm.weight  2816  F32  2816 el
+ *  [412] blk.18.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [413] blk.18.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [414] blk.18.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [415] blk.19.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [416] blk.19.attn_k_norm.weight  256  F32  256 el
+ *  [417] blk.19.attn_norm.weight  2816  F32  2816 el
+ *  [418] blk.19.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [419] blk.19.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [420] blk.19.attn_q_norm.weight  256  F32  256 el
+ *  [421] blk.19.attn_v.weight  2816x2048  Q4_K  5767168 el
+ *  [422] blk.19.ffn_down.weight  2112x2816  Q5_0  5947392 el
+ *  [423] blk.19.ffn_down_exps.scale  128  F32  128 el
+ *  [424] blk.19.ffn_down_exps.weight  704x2816x128  Q5_0  253755392 el
+ *  [425] blk.19.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [426] blk.19.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [427] blk.19.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [428] blk.19.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [429] blk.19.ffn_norm.weight  2816  F32  2816 el
+ *  [430] blk.19.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [431] blk.19.layer_output_scale.weight  1  F32  1 el
+ *  [432] blk.19.post_attention_norm.weight  2816  F32  2816 el
+ *  [433] blk.19.post_ffw_norm.weight  2816  F32  2816 el
+ *  [434] blk.19.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [435] blk.19.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [436] blk.19.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [437] blk.20.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [438] blk.20.attn_k_norm.weight  256  F32  256 el
+ *  [439] blk.20.attn_norm.weight  2816  F32  2816 el
+ *  [440] blk.20.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [441] blk.20.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [442] blk.20.attn_q_norm.weight  256  F32  256 el
+ *  [443] blk.20.attn_v.weight  2816x2048  Q6_K  5767168 el
+ *  [444] blk.20.ffn_down.weight  2112x2816  Q8_0  5947392 el
+ *  [445] blk.20.ffn_down_exps.scale  128  F32  128 el
+ *  [446] blk.20.ffn_down_exps.weight  704x2816x128  Q8_0  253755392 el
+ *  [447] blk.20.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [448] blk.20.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [449] blk.20.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [450] blk.20.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [451] blk.20.ffn_norm.weight  2816  F32  2816 el
+ *  [452] blk.20.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [453] blk.20.layer_output_scale.weight  1  F32  1 el
+ *  [454] blk.20.post_attention_norm.weight  2816  F32  2816 el
+ *  [455] blk.20.post_ffw_norm.weight  2816  F32  2816 el
+ *  [456] blk.20.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [457] blk.20.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [458] blk.20.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [459] blk.21.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [460] blk.21.attn_k_norm.weight  256  F32  256 el
+ *  [461] blk.21.attn_norm.weight  2816  F32  2816 el
+ *  [462] blk.21.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [463] blk.21.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [464] blk.21.attn_q_norm.weight  256  F32  256 el
+ *  [465] blk.21.attn_v.weight  2816x2048  Q4_K  5767168 el
+ *  [466] blk.21.ffn_down.weight  2112x2816  Q5_0  5947392 el
+ *  [467] blk.21.ffn_down_exps.scale  128  F32  128 el
+ *  [468] blk.21.ffn_down_exps.weight  704x2816x128  Q5_0  253755392 el
+ *  [469] blk.21.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [470] blk.21.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [471] blk.21.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [472] blk.21.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [473] blk.21.ffn_norm.weight  2816  F32  2816 el
+ *  [474] blk.21.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [475] blk.21.layer_output_scale.weight  1  F32  1 el
+ *  [476] blk.21.post_attention_norm.weight  2816  F32  2816 el
+ *  [477] blk.21.post_ffw_norm.weight  2816  F32  2816 el
+ *  [478] blk.21.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [479] blk.21.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [480] blk.21.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [481] blk.22.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [482] blk.22.attn_k_norm.weight  256  F32  256 el
+ *  [483] blk.22.attn_norm.weight  2816  F32  2816 el
+ *  [484] blk.22.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [485] blk.22.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [486] blk.22.attn_q_norm.weight  256  F32  256 el
+ *  [487] blk.22.attn_v.weight  2816x2048  Q4_K  5767168 el
+ *  [488] blk.22.ffn_down.weight  2112x2816  Q5_0  5947392 el
+ *  [489] blk.22.ffn_down_exps.scale  128  F32  128 el
+ *  [490] blk.22.ffn_down_exps.weight  704x2816x128  Q5_0  253755392 el
+ *  [491] blk.22.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [492] blk.22.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [493] blk.22.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [494] blk.22.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [495] blk.22.ffn_norm.weight  2816  F32  2816 el
+ *  [496] blk.22.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [497] blk.22.layer_output_scale.weight  1  F32  1 el
+ *  [498] blk.22.post_attention_norm.weight  2816  F32  2816 el
+ *  [499] blk.22.post_ffw_norm.weight  2816  F32  2816 el
+ *  [500] blk.22.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [501] blk.22.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [502] blk.22.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [503] blk.23.attn_k.weight  2816x1024  Q4_K  2883584 el
+ *  [504] blk.23.attn_k_norm.weight  512  F32  512 el
+ *  [505] blk.23.attn_norm.weight  2816  F32  2816 el
+ *  [506] blk.23.attn_output.weight  8192x2816  Q4_K  23068672 el
+ *  [507] blk.23.attn_q.weight  2816x8192  Q4_K  23068672 el
+ *  [508] blk.23.attn_q_norm.weight  512  F32  512 el
+ *  [509] blk.23.ffn_down.weight  2112x2816  Q8_0  5947392 el
+ *  [510] blk.23.ffn_down_exps.scale  128  F32  128 el
+ *  [511] blk.23.ffn_down_exps.weight  704x2816x128  Q8_0  253755392 el
+ *  [512] blk.23.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [513] blk.23.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [514] blk.23.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [515] blk.23.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [516] blk.23.ffn_norm.weight  2816  F32  2816 el
+ *  [517] blk.23.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [518] blk.23.layer_output_scale.weight  1  F32  1 el
+ *  [519] blk.23.post_attention_norm.weight  2816  F32  2816 el
+ *  [520] blk.23.post_ffw_norm.weight  2816  F32  2816 el
+ *  [521] blk.23.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [522] blk.23.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [523] blk.23.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [524] blk.24.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [525] blk.24.attn_k_norm.weight  256  F32  256 el
+ *  [526] blk.24.attn_norm.weight  2816  F32  2816 el
+ *  [527] blk.24.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [528] blk.24.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [529] blk.24.attn_q_norm.weight  256  F32  256 el
+ *  [530] blk.24.attn_v.weight  2816x2048  Q6_K  5767168 el
+ *  [531] blk.24.ffn_down.weight  2112x2816  Q5_0  5947392 el
+ *  [532] blk.24.ffn_down_exps.scale  128  F32  128 el
+ *  [533] blk.24.ffn_down_exps.weight  704x2816x128  Q5_0  253755392 el
+ *  [534] blk.24.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [535] blk.24.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [536] blk.24.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [537] blk.24.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [538] blk.24.ffn_norm.weight  2816  F32  2816 el
+ *  [539] blk.24.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [540] blk.24.layer_output_scale.weight  1  F32  1 el
+ *  [541] blk.24.post_attention_norm.weight  2816  F32  2816 el
+ *  [542] blk.24.post_ffw_norm.weight  2816  F32  2816 el
+ *  [543] blk.24.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [544] blk.24.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [545] blk.24.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [546] blk.25.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [547] blk.25.attn_k_norm.weight  256  F32  256 el
+ *  [548] blk.25.attn_norm.weight  2816  F32  2816 el
+ *  [549] blk.25.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [550] blk.25.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [551] blk.25.attn_q_norm.weight  256  F32  256 el
+ *  [552] blk.25.attn_v.weight  2816x2048  Q4_K  5767168 el
+ *  [553] blk.25.ffn_down.weight  2112x2816  Q5_0  5947392 el
+ *  [554] blk.25.ffn_down_exps.scale  128  F32  128 el
+ *  [555] blk.25.ffn_down_exps.weight  704x2816x128  Q5_0  253755392 el
+ *  [556] blk.25.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [557] blk.25.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [558] blk.25.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [559] blk.25.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [560] blk.25.ffn_norm.weight  2816  F32  2816 el
+ *  [561] blk.25.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [562] blk.25.layer_output_scale.weight  1  F32  1 el
+ *  [563] blk.25.post_attention_norm.weight  2816  F32  2816 el
+ *  [564] blk.25.post_ffw_norm.weight  2816  F32  2816 el
+ *  [565] blk.25.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [566] blk.25.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [567] blk.25.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [568] blk.26.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [569] blk.26.attn_k_norm.weight  256  F32  256 el
+ *  [570] blk.26.attn_norm.weight  2816  F32  2816 el
+ *  [571] blk.26.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [572] blk.26.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [573] blk.26.attn_q_norm.weight  256  F32  256 el
+ *  [574] blk.26.attn_v.weight  2816x2048  Q4_K  5767168 el
+ *  [575] blk.26.ffn_down.weight  2112x2816  Q8_0  5947392 el
+ *  [576] blk.26.ffn_down_exps.scale  128  F32  128 el
+ *  [577] blk.26.ffn_down_exps.weight  704x2816x128  Q8_0  253755392 el
+ *  [578] blk.26.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [579] blk.26.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [580] blk.26.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [581] blk.26.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [582] blk.26.ffn_norm.weight  2816  F32  2816 el
+ *  [583] blk.26.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [584] blk.26.layer_output_scale.weight  1  F32  1 el
+ *  [585] blk.26.post_attention_norm.weight  2816  F32  2816 el
+ *  [586] blk.26.post_ffw_norm.weight  2816  F32  2816 el
+ *  [587] blk.26.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [588] blk.26.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [589] blk.26.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [590] blk.27.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [591] blk.27.attn_k_norm.weight  256  F32  256 el
+ *  [592] blk.27.attn_norm.weight  2816  F32  2816 el
+ *  [593] blk.27.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [594] blk.27.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [595] blk.27.attn_q_norm.weight  256  F32  256 el
+ *  [596] blk.27.attn_v.weight  2816x2048  Q6_K  5767168 el
+ *  [597] blk.27.ffn_down.weight  2112x2816  Q8_0  5947392 el
+ *  [598] blk.27.ffn_down_exps.scale  128  F32  128 el
+ *  [599] blk.27.ffn_down_exps.weight  704x2816x128  Q8_0  253755392 el
+ *  [600] blk.27.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [601] blk.27.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [602] blk.27.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [603] blk.27.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [604] blk.27.ffn_norm.weight  2816  F32  2816 el
+ *  [605] blk.27.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [606] blk.27.layer_output_scale.weight  1  F32  1 el
+ *  [607] blk.27.post_attention_norm.weight  2816  F32  2816 el
+ *  [608] blk.27.post_ffw_norm.weight  2816  F32  2816 el
+ *  [609] blk.27.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [610] blk.27.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [611] blk.27.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [612] blk.28.attn_k.weight  2816x2048  Q4_K  5767168 el
+ *  [613] blk.28.attn_k_norm.weight  256  F32  256 el
+ *  [614] blk.28.attn_norm.weight  2816  F32  2816 el
+ *  [615] blk.28.attn_output.weight  4096x2816  Q4_K  11534336 el
+ *  [616] blk.28.attn_q.weight  2816x4096  Q4_K  11534336 el
+ *  [617] blk.28.attn_q_norm.weight  256  F32  256 el
+ *  [618] blk.28.attn_v.weight  2816x2048  Q4_K  5767168 el
+ *  [619] blk.28.ffn_down.weight  2112x2816  Q8_0  5947392 el
+ *  [620] blk.28.ffn_down_exps.scale  128  F32  128 el
+ *  [621] blk.28.ffn_down_exps.weight  704x2816x128  Q8_0  253755392 el
+ *  [622] blk.28.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [623] blk.28.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [624] blk.28.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [625] blk.28.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [626] blk.28.ffn_norm.weight  2816  F32  2816 el
+ *  [627] blk.28.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [628] blk.28.layer_output_scale.weight  1  F32  1 el
+ *  [629] blk.28.post_attention_norm.weight  2816  F32  2816 el
+ *  [630] blk.28.post_ffw_norm.weight  2816  F32  2816 el
+ *  [631] blk.28.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [632] blk.28.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [633] blk.28.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [634] blk.29.attn_k.weight  2816x1024  Q4_K  2883584 el
+ *  [635] blk.29.attn_k_norm.weight  512  F32  512 el
+ *  [636] blk.29.attn_norm.weight  2816  F32  2816 el
+ *  [637] blk.29.attn_output.weight  8192x2816  Q4_K  23068672 el
+ *  [638] blk.29.attn_q.weight  2816x8192  Q4_K  23068672 el
+ *  [639] blk.29.attn_q_norm.weight  512  F32  512 el
+ *  [640] blk.29.ffn_down.weight  2112x2816  Q8_0  5947392 el
+ *  [641] blk.29.ffn_down_exps.scale  128  F32  128 el
+ *  [642] blk.29.ffn_down_exps.weight  704x2816x128  Q8_0  253755392 el
+ *  [643] blk.29.ffn_gate.weight  2816x2112  Q4_K  5947392 el
+ *  [644] blk.29.ffn_gate_inp.scale  2816  F32  2816 el
+ *  [645] blk.29.ffn_gate_inp.weight  2816x128  F32  360448 el
+ *  [646] blk.29.ffn_gate_up_exps.weight  2816x1408x128  Q4_K  507510784 el
+ *  [647] blk.29.ffn_norm.weight  2816  F32  2816 el
+ *  [648] blk.29.ffn_up.weight  2816x2112  Q4_K  5947392 el
+ *  [649] blk.29.layer_output_scale.weight  1  F32  1 el
+ *  [650] blk.29.post_attention_norm.weight  2816  F32  2816 el
+ *  [651] blk.29.post_ffw_norm.weight  2816  F32  2816 el
+ *  [652] blk.29.post_ffw_norm_1.weight  2816  F32  2816 el
+ *  [653] blk.29.post_ffw_norm_2.weight  2816  F32  2816 el
+ *  [654] blk.29.pre_ffw_norm_2.weight  2816  F32  2816 el
+ *  [655] mm.input_projection.weight  1152x2816  F16  3244032 el
+ *  [656] output_norm.weight  2816  F32  2816 el
+ *  [657] rope_freqs.weight  256  F32  256 el
+ *  [658] token_embd.weight  2816x262144  Q6_K  738197504 el
+ *  [659] v.blk.0.attn_k.weight  1152x1152  F16  1327104 el
+ *  [660] v.blk.0.attn_k_norm.weight  72  F32  72 el
+ *  [661] v.blk.0.attn_out.weight  1152x1152  F16  1327104 el
+ *  [662] v.blk.0.attn_post_norm.weight  1152  F32  1152 el
+ *  [663] v.blk.0.attn_q.weight  1152x1152  F16  1327104 el
+ *  [664] v.blk.0.attn_q_norm.weight  72  F32  72 el
+ *  [665] v.blk.0.attn_v.weight  1152x1152  F16  1327104 el
+ *  [666] v.blk.0.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [667] v.blk.0.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [668] v.blk.0.ffn_post_norm.weight  1152  F32  1152 el
+ *  [669] v.blk.0.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [670] v.blk.0.ln1.weight  1152  F32  1152 el
+ *  [671] v.blk.0.ln2.weight  1152  F32  1152 el
+ *  [672] v.blk.1.attn_k.weight  1152x1152  F16  1327104 el
+ *  [673] v.blk.1.attn_k_norm.weight  72  F32  72 el
+ *  [674] v.blk.1.attn_out.weight  1152x1152  F16  1327104 el
+ *  [675] v.blk.1.attn_post_norm.weight  1152  F32  1152 el
+ *  [676] v.blk.1.attn_q.weight  1152x1152  F16  1327104 el
+ *  [677] v.blk.1.attn_q_norm.weight  72  F32  72 el
+ *  [678] v.blk.1.attn_v.weight  1152x1152  F16  1327104 el
+ *  [679] v.blk.1.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [680] v.blk.1.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [681] v.blk.1.ffn_post_norm.weight  1152  F32  1152 el
+ *  [682] v.blk.1.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [683] v.blk.1.ln1.weight  1152  F32  1152 el
+ *  [684] v.blk.1.ln2.weight  1152  F32  1152 el
+ *  [685] v.blk.10.attn_k.weight  1152x1152  F16  1327104 el
+ *  [686] v.blk.10.attn_k_norm.weight  72  F32  72 el
+ *  [687] v.blk.10.attn_out.weight  1152x1152  F16  1327104 el
+ *  [688] v.blk.10.attn_post_norm.weight  1152  F32  1152 el
+ *  [689] v.blk.10.attn_q.weight  1152x1152  F16  1327104 el
+ *  [690] v.blk.10.attn_q_norm.weight  72  F32  72 el
+ *  [691] v.blk.10.attn_v.weight  1152x1152  F16  1327104 el
+ *  [692] v.blk.10.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [693] v.blk.10.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [694] v.blk.10.ffn_post_norm.weight  1152  F32  1152 el
+ *  [695] v.blk.10.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [696] v.blk.10.ln1.weight  1152  F32  1152 el
+ *  [697] v.blk.10.ln2.weight  1152  F32  1152 el
+ *  [698] v.blk.11.attn_k.weight  1152x1152  F16  1327104 el
+ *  [699] v.blk.11.attn_k_norm.weight  72  F32  72 el
+ *  [700] v.blk.11.attn_out.weight  1152x1152  F16  1327104 el
+ *  [701] v.blk.11.attn_post_norm.weight  1152  F32  1152 el
+ *  [702] v.blk.11.attn_q.weight  1152x1152  F16  1327104 el
+ *  [703] v.blk.11.attn_q_norm.weight  72  F32  72 el
+ *  [704] v.blk.11.attn_v.weight  1152x1152  F16  1327104 el
+ *  [705] v.blk.11.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [706] v.blk.11.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [707] v.blk.11.ffn_post_norm.weight  1152  F32  1152 el
+ *  [708] v.blk.11.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [709] v.blk.11.ln1.weight  1152  F32  1152 el
+ *  [710] v.blk.11.ln2.weight  1152  F32  1152 el
+ *  [711] v.blk.12.attn_k.weight  1152x1152  F16  1327104 el
+ *  [712] v.blk.12.attn_k_norm.weight  72  F32  72 el
+ *  [713] v.blk.12.attn_out.weight  1152x1152  F16  1327104 el
+ *  [714] v.blk.12.attn_post_norm.weight  1152  F32  1152 el
+ *  [715] v.blk.12.attn_q.weight  1152x1152  F16  1327104 el
+ *  [716] v.blk.12.attn_q_norm.weight  72  F32  72 el
+ *  [717] v.blk.12.attn_v.weight  1152x1152  F16  1327104 el
+ *  [718] v.blk.12.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [719] v.blk.12.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [720] v.blk.12.ffn_post_norm.weight  1152  F32  1152 el
+ *  [721] v.blk.12.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [722] v.blk.12.ln1.weight  1152  F32  1152 el
+ *  [723] v.blk.12.ln2.weight  1152  F32  1152 el
+ *  [724] v.blk.13.attn_k.weight  1152x1152  F16  1327104 el
+ *  [725] v.blk.13.attn_k_norm.weight  72  F32  72 el
+ *  [726] v.blk.13.attn_out.weight  1152x1152  F16  1327104 el
+ *  [727] v.blk.13.attn_post_norm.weight  1152  F32  1152 el
+ *  [728] v.blk.13.attn_q.weight  1152x1152  F16  1327104 el
+ *  [729] v.blk.13.attn_q_norm.weight  72  F32  72 el
+ *  [730] v.blk.13.attn_v.weight  1152x1152  F16  1327104 el
+ *  [731] v.blk.13.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [732] v.blk.13.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [733] v.blk.13.ffn_post_norm.weight  1152  F32  1152 el
+ *  [734] v.blk.13.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [735] v.blk.13.ln1.weight  1152  F32  1152 el
+ *  [736] v.blk.13.ln2.weight  1152  F32  1152 el
+ *  [737] v.blk.14.attn_k.weight  1152x1152  F16  1327104 el
+ *  [738] v.blk.14.attn_k_norm.weight  72  F32  72 el
+ *  [739] v.blk.14.attn_out.weight  1152x1152  F16  1327104 el
+ *  [740] v.blk.14.attn_post_norm.weight  1152  F32  1152 el
+ *  [741] v.blk.14.attn_q.weight  1152x1152  F16  1327104 el
+ *  [742] v.blk.14.attn_q_norm.weight  72  F32  72 el
+ *  [743] v.blk.14.attn_v.weight  1152x1152  F16  1327104 el
+ *  [744] v.blk.14.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [745] v.blk.14.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [746] v.blk.14.ffn_post_norm.weight  1152  F32  1152 el
+ *  [747] v.blk.14.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [748] v.blk.14.ln1.weight  1152  F32  1152 el
+ *  [749] v.blk.14.ln2.weight  1152  F32  1152 el
+ *  [750] v.blk.15.attn_k.weight  1152x1152  F16  1327104 el
+ *  [751] v.blk.15.attn_k_norm.weight  72  F32  72 el
+ *  [752] v.blk.15.attn_out.weight  1152x1152  F16  1327104 el
+ *  [753] v.blk.15.attn_post_norm.weight  1152  F32  1152 el
+ *  [754] v.blk.15.attn_q.weight  1152x1152  F16  1327104 el
+ *  [755] v.blk.15.attn_q_norm.weight  72  F32  72 el
+ *  [756] v.blk.15.attn_v.weight  1152x1152  F16  1327104 el
+ *  [757] v.blk.15.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [758] v.blk.15.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [759] v.blk.15.ffn_post_norm.weight  1152  F32  1152 el
+ *  [760] v.blk.15.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [761] v.blk.15.ln1.weight  1152  F32  1152 el
+ *  [762] v.blk.15.ln2.weight  1152  F32  1152 el
+ *  [763] v.blk.16.attn_k.weight  1152x1152  F16  1327104 el
+ *  [764] v.blk.16.attn_k_norm.weight  72  F32  72 el
+ *  [765] v.blk.16.attn_out.weight  1152x1152  F16  1327104 el
+ *  [766] v.blk.16.attn_post_norm.weight  1152  F32  1152 el
+ *  [767] v.blk.16.attn_q.weight  1152x1152  F16  1327104 el
+ *  [768] v.blk.16.attn_q_norm.weight  72  F32  72 el
+ *  [769] v.blk.16.attn_v.weight  1152x1152  F16  1327104 el
+ *  [770] v.blk.16.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [771] v.blk.16.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [772] v.blk.16.ffn_post_norm.weight  1152  F32  1152 el
+ *  [773] v.blk.16.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [774] v.blk.16.ln1.weight  1152  F32  1152 el
+ *  [775] v.blk.16.ln2.weight  1152  F32  1152 el
+ *  [776] v.blk.17.attn_k.weight  1152x1152  F16  1327104 el
+ *  [777] v.blk.17.attn_k_norm.weight  72  F32  72 el
+ *  [778] v.blk.17.attn_out.weight  1152x1152  F16  1327104 el
+ *  [779] v.blk.17.attn_post_norm.weight  1152  F32  1152 el
+ *  [780] v.blk.17.attn_q.weight  1152x1152  F16  1327104 el
+ *  [781] v.blk.17.attn_q_norm.weight  72  F32  72 el
+ *  [782] v.blk.17.attn_v.weight  1152x1152  F16  1327104 el
+ *  [783] v.blk.17.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [784] v.blk.17.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [785] v.blk.17.ffn_post_norm.weight  1152  F32  1152 el
+ *  [786] v.blk.17.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [787] v.blk.17.ln1.weight  1152  F32  1152 el
+ *  [788] v.blk.17.ln2.weight  1152  F32  1152 el
+ *  [789] v.blk.18.attn_k.weight  1152x1152  F16  1327104 el
+ *  [790] v.blk.18.attn_k_norm.weight  72  F32  72 el
+ *  [791] v.blk.18.attn_out.weight  1152x1152  F16  1327104 el
+ *  [792] v.blk.18.attn_post_norm.weight  1152  F32  1152 el
+ *  [793] v.blk.18.attn_q.weight  1152x1152  F16  1327104 el
+ *  [794] v.blk.18.attn_q_norm.weight  72  F32  72 el
+ *  [795] v.blk.18.attn_v.weight  1152x1152  F16  1327104 el
+ *  [796] v.blk.18.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [797] v.blk.18.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [798] v.blk.18.ffn_post_norm.weight  1152  F32  1152 el
+ *  [799] v.blk.18.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [800] v.blk.18.ln1.weight  1152  F32  1152 el
+ *  [801] v.blk.18.ln2.weight  1152  F32  1152 el
+ *  [802] v.blk.19.attn_k.weight  1152x1152  F16  1327104 el
+ *  [803] v.blk.19.attn_k_norm.weight  72  F32  72 el
+ *  [804] v.blk.19.attn_out.weight  1152x1152  F16  1327104 el
+ *  [805] v.blk.19.attn_post_norm.weight  1152  F32  1152 el
+ *  [806] v.blk.19.attn_q.weight  1152x1152  F16  1327104 el
+ *  [807] v.blk.19.attn_q_norm.weight  72  F32  72 el
+ *  [808] v.blk.19.attn_v.weight  1152x1152  F16  1327104 el
+ *  [809] v.blk.19.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [810] v.blk.19.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [811] v.blk.19.ffn_post_norm.weight  1152  F32  1152 el
+ *  [812] v.blk.19.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [813] v.blk.19.ln1.weight  1152  F32  1152 el
+ *  [814] v.blk.19.ln2.weight  1152  F32  1152 el
+ *  [815] v.blk.2.attn_k.weight  1152x1152  F16  1327104 el
+ *  [816] v.blk.2.attn_k_norm.weight  72  F32  72 el
+ *  [817] v.blk.2.attn_out.weight  1152x1152  F16  1327104 el
+ *  [818] v.blk.2.attn_post_norm.weight  1152  F32  1152 el
+ *  [819] v.blk.2.attn_q.weight  1152x1152  F16  1327104 el
+ *  [820] v.blk.2.attn_q_norm.weight  72  F32  72 el
+ *  [821] v.blk.2.attn_v.weight  1152x1152  F16  1327104 el
+ *  [822] v.blk.2.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [823] v.blk.2.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [824] v.blk.2.ffn_post_norm.weight  1152  F32  1152 el
+ *  [825] v.blk.2.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [826] v.blk.2.ln1.weight  1152  F32  1152 el
+ *  [827] v.blk.2.ln2.weight  1152  F32  1152 el
+ *  [828] v.blk.20.attn_k.weight  1152x1152  F16  1327104 el
+ *  [829] v.blk.20.attn_k_norm.weight  72  F32  72 el
+ *  [830] v.blk.20.attn_out.weight  1152x1152  F16  1327104 el
+ *  [831] v.blk.20.attn_post_norm.weight  1152  F32  1152 el
+ *  [832] v.blk.20.attn_q.weight  1152x1152  F16  1327104 el
+ *  [833] v.blk.20.attn_q_norm.weight  72  F32  72 el
+ *  [834] v.blk.20.attn_v.weight  1152x1152  F16  1327104 el
+ *  [835] v.blk.20.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [836] v.blk.20.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [837] v.blk.20.ffn_post_norm.weight  1152  F32  1152 el
+ *  [838] v.blk.20.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [839] v.blk.20.ln1.weight  1152  F32  1152 el
+ *  [840] v.blk.20.ln2.weight  1152  F32  1152 el
+ *  [841] v.blk.21.attn_k.weight  1152x1152  F16  1327104 el
+ *  [842] v.blk.21.attn_k_norm.weight  72  F32  72 el
+ *  [843] v.blk.21.attn_out.weight  1152x1152  F16  1327104 el
+ *  [844] v.blk.21.attn_post_norm.weight  1152  F32  1152 el
+ *  [845] v.blk.21.attn_q.weight  1152x1152  F16  1327104 el
+ *  [846] v.blk.21.attn_q_norm.weight  72  F32  72 el
+ *  [847] v.blk.21.attn_v.weight  1152x1152  F16  1327104 el
+ *  [848] v.blk.21.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [849] v.blk.21.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [850] v.blk.21.ffn_post_norm.weight  1152  F32  1152 el
+ *  [851] v.blk.21.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [852] v.blk.21.ln1.weight  1152  F32  1152 el
+ *  [853] v.blk.21.ln2.weight  1152  F32  1152 el
+ *  [854] v.blk.22.attn_k.weight  1152x1152  F16  1327104 el
+ *  [855] v.blk.22.attn_k_norm.weight  72  F32  72 el
+ *  [856] v.blk.22.attn_out.weight  1152x1152  F16  1327104 el
+ *  [857] v.blk.22.attn_post_norm.weight  1152  F32  1152 el
+ *  [858] v.blk.22.attn_q.weight  1152x1152  F16  1327104 el
+ *  [859] v.blk.22.attn_q_norm.weight  72  F32  72 el
+ *  [860] v.blk.22.attn_v.weight  1152x1152  F16  1327104 el
+ *  [861] v.blk.22.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [862] v.blk.22.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [863] v.blk.22.ffn_post_norm.weight  1152  F32  1152 el
+ *  [864] v.blk.22.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [865] v.blk.22.ln1.weight  1152  F32  1152 el
+ *  [866] v.blk.22.ln2.weight  1152  F32  1152 el
+ *  [867] v.blk.23.attn_k.weight  1152x1152  F16  1327104 el
+ *  [868] v.blk.23.attn_k_norm.weight  72  F32  72 el
+ *  [869] v.blk.23.attn_out.weight  1152x1152  F16  1327104 el
+ *  [870] v.blk.23.attn_post_norm.weight  1152  F32  1152 el
+ *  [871] v.blk.23.attn_q.weight  1152x1152  F16  1327104 el
+ *  [872] v.blk.23.attn_q_norm.weight  72  F32  72 el
+ *  [873] v.blk.23.attn_v.weight  1152x1152  F16  1327104 el
+ *  [874] v.blk.23.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [875] v.blk.23.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [876] v.blk.23.ffn_post_norm.weight  1152  F32  1152 el
+ *  [877] v.blk.23.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [878] v.blk.23.ln1.weight  1152  F32  1152 el
+ *  [879] v.blk.23.ln2.weight  1152  F32  1152 el
+ *  [880] v.blk.24.attn_k.weight  1152x1152  F16  1327104 el
+ *  [881] v.blk.24.attn_k_norm.weight  72  F32  72 el
+ *  [882] v.blk.24.attn_out.weight  1152x1152  F16  1327104 el
+ *  [883] v.blk.24.attn_post_norm.weight  1152  F32  1152 el
+ *  [884] v.blk.24.attn_q.weight  1152x1152  F16  1327104 el
+ *  [885] v.blk.24.attn_q_norm.weight  72  F32  72 el
+ *  [886] v.blk.24.attn_v.weight  1152x1152  F16  1327104 el
+ *  [887] v.blk.24.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [888] v.blk.24.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [889] v.blk.24.ffn_post_norm.weight  1152  F32  1152 el
+ *  [890] v.blk.24.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [891] v.blk.24.ln1.weight  1152  F32  1152 el
+ *  [892] v.blk.24.ln2.weight  1152  F32  1152 el
+ *  [893] v.blk.25.attn_k.weight  1152x1152  F16  1327104 el
+ *  [894] v.blk.25.attn_k_norm.weight  72  F32  72 el
+ *  [895] v.blk.25.attn_out.weight  1152x1152  F16  1327104 el
+ *  [896] v.blk.25.attn_post_norm.weight  1152  F32  1152 el
+ *  [897] v.blk.25.attn_q.weight  1152x1152  F16  1327104 el
+ *  [898] v.blk.25.attn_q_norm.weight  72  F32  72 el
+ *  [899] v.blk.25.attn_v.weight  1152x1152  F16  1327104 el
+ *  [900] v.blk.25.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [901] v.blk.25.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [902] v.blk.25.ffn_post_norm.weight  1152  F32  1152 el
+ *  [903] v.blk.25.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [904] v.blk.25.ln1.weight  1152  F32  1152 el
+ *  [905] v.blk.25.ln2.weight  1152  F32  1152 el
+ *  [906] v.blk.26.attn_k.weight  1152x1152  F16  1327104 el
+ *  [907] v.blk.26.attn_k_norm.weight  72  F32  72 el
+ *  [908] v.blk.26.attn_out.weight  1152x1152  F16  1327104 el
+ *  [909] v.blk.26.attn_post_norm.weight  1152  F32  1152 el
+ *  [910] v.blk.26.attn_q.weight  1152x1152  F16  1327104 el
+ *  [911] v.blk.26.attn_q_norm.weight  72  F32  72 el
+ *  [912] v.blk.26.attn_v.weight  1152x1152  F16  1327104 el
+ *  [913] v.blk.26.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [914] v.blk.26.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [915] v.blk.26.ffn_post_norm.weight  1152  F32  1152 el
+ *  [916] v.blk.26.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [917] v.blk.26.ln1.weight  1152  F32  1152 el
+ *  [918] v.blk.26.ln2.weight  1152  F32  1152 el
+ *  [919] v.blk.3.attn_k.weight  1152x1152  F16  1327104 el
+ *  [920] v.blk.3.attn_k_norm.weight  72  F32  72 el
+ *  [921] v.blk.3.attn_out.weight  1152x1152  F16  1327104 el
+ *  [922] v.blk.3.attn_post_norm.weight  1152  F32  1152 el
+ *  [923] v.blk.3.attn_q.weight  1152x1152  F16  1327104 el
+ *  [924] v.blk.3.attn_q_norm.weight  72  F32  72 el
+ *  [925] v.blk.3.attn_v.weight  1152x1152  F16  1327104 el
+ *  [926] v.blk.3.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [927] v.blk.3.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [928] v.blk.3.ffn_post_norm.weight  1152  F32  1152 el
+ *  [929] v.blk.3.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [930] v.blk.3.ln1.weight  1152  F32  1152 el
+ *  [931] v.blk.3.ln2.weight  1152  F32  1152 el
+ *  [932] v.blk.4.attn_k.weight  1152x1152  F16  1327104 el
+ *  [933] v.blk.4.attn_k_norm.weight  72  F32  72 el
+ *  [934] v.blk.4.attn_out.weight  1152x1152  F16  1327104 el
+ *  [935] v.blk.4.attn_post_norm.weight  1152  F32  1152 el
+ *  [936] v.blk.4.attn_q.weight  1152x1152  F16  1327104 el
+ *  [937] v.blk.4.attn_q_norm.weight  72  F32  72 el
+ *  [938] v.blk.4.attn_v.weight  1152x1152  F16  1327104 el
+ *  [939] v.blk.4.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [940] v.blk.4.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [941] v.blk.4.ffn_post_norm.weight  1152  F32  1152 el
+ *  [942] v.blk.4.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [943] v.blk.4.ln1.weight  1152  F32  1152 el
+ *  [944] v.blk.4.ln2.weight  1152  F32  1152 el
+ *  [945] v.blk.5.attn_k.weight  1152x1152  F16  1327104 el
+ *  [946] v.blk.5.attn_k_norm.weight  72  F32  72 el
+ *  [947] v.blk.5.attn_out.weight  1152x1152  F16  1327104 el
+ *  [948] v.blk.5.attn_post_norm.weight  1152  F32  1152 el
+ *  [949] v.blk.5.attn_q.weight  1152x1152  F16  1327104 el
+ *  [950] v.blk.5.attn_q_norm.weight  72  F32  72 el
+ *  [951] v.blk.5.attn_v.weight  1152x1152  F16  1327104 el
+ *  [952] v.blk.5.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [953] v.blk.5.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [954] v.blk.5.ffn_post_norm.weight  1152  F32  1152 el
+ *  [955] v.blk.5.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [956] v.blk.5.ln1.weight  1152  F32  1152 el
+ *  [957] v.blk.5.ln2.weight  1152  F32  1152 el
+ *  [958] v.blk.6.attn_k.weight  1152x1152  F16  1327104 el
+ *  [959] v.blk.6.attn_k_norm.weight  72  F32  72 el
+ *  [960] v.blk.6.attn_out.weight  1152x1152  F16  1327104 el
+ *  [961] v.blk.6.attn_post_norm.weight  1152  F32  1152 el
+ *  [962] v.blk.6.attn_q.weight  1152x1152  F16  1327104 el
+ *  [963] v.blk.6.attn_q_norm.weight  72  F32  72 el
+ *  [964] v.blk.6.attn_v.weight  1152x1152  F16  1327104 el
+ *  [965] v.blk.6.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [966] v.blk.6.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [967] v.blk.6.ffn_post_norm.weight  1152  F32  1152 el
+ *  [968] v.blk.6.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [969] v.blk.6.ln1.weight  1152  F32  1152 el
+ *  [970] v.blk.6.ln2.weight  1152  F32  1152 el
+ *  [971] v.blk.7.attn_k.weight  1152x1152  F16  1327104 el
+ *  [972] v.blk.7.attn_k_norm.weight  72  F32  72 el
+ *  [973] v.blk.7.attn_out.weight  1152x1152  F16  1327104 el
+ *  [974] v.blk.7.attn_post_norm.weight  1152  F32  1152 el
+ *  [975] v.blk.7.attn_q.weight  1152x1152  F16  1327104 el
+ *  [976] v.blk.7.attn_q_norm.weight  72  F32  72 el
+ *  [977] v.blk.7.attn_v.weight  1152x1152  F16  1327104 el
+ *  [978] v.blk.7.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [979] v.blk.7.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [980] v.blk.7.ffn_post_norm.weight  1152  F32  1152 el
+ *  [981] v.blk.7.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [982] v.blk.7.ln1.weight  1152  F32  1152 el
+ *  [983] v.blk.7.ln2.weight  1152  F32  1152 el
+ *  [984] v.blk.8.attn_k.weight  1152x1152  F16  1327104 el
+ *  [985] v.blk.8.attn_k_norm.weight  72  F32  72 el
+ *  [986] v.blk.8.attn_out.weight  1152x1152  F16  1327104 el
+ *  [987] v.blk.8.attn_post_norm.weight  1152  F32  1152 el
+ *  [988] v.blk.8.attn_q.weight  1152x1152  F16  1327104 el
+ *  [989] v.blk.8.attn_q_norm.weight  72  F32  72 el
+ *  [990] v.blk.8.attn_v.weight  1152x1152  F16  1327104 el
+ *  [991] v.blk.8.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [992] v.blk.8.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [993] v.blk.8.ffn_post_norm.weight  1152  F32  1152 el
+ *  [994] v.blk.8.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [995] v.blk.8.ln1.weight  1152  F32  1152 el
+ *  [996] v.blk.8.ln2.weight  1152  F32  1152 el
+ *  [997] v.blk.9.attn_k.weight  1152x1152  F16  1327104 el
+ *  [998] v.blk.9.attn_k_norm.weight  72  F32  72 el
+ *  [999] v.blk.9.attn_out.weight  1152x1152  F16  1327104 el
+ *  [1000] v.blk.9.attn_post_norm.weight  1152  F32  1152 el
+ *  [1001] v.blk.9.attn_q.weight  1152x1152  F16  1327104 el
+ *  [1002] v.blk.9.attn_q_norm.weight  72  F32  72 el
+ *  [1003] v.blk.9.attn_v.weight  1152x1152  F16  1327104 el
+ *  [1004] v.blk.9.ffn_down.weight  4304x1152  F16  4958208 el
+ *  [1005] v.blk.9.ffn_gate.weight  1152x4304  F16  4958208 el
+ *  [1006] v.blk.9.ffn_post_norm.weight  1152  F32  1152 el
+ *  [1007] v.blk.9.ffn_up.weight  1152x4304  F16  4958208 el
+ *  [1008] v.blk.9.ln1.weight  1152  F32  1152 el
+ *  [1009] v.blk.9.ln2.weight  1152  F32  1152 el
+ *  [1010] v.patch_embd.weight  16x16x3x1152  F16  884736 el
+ *  [1011] v.position_embd.weight  1152x10240x2  F32  23592960 el
+ *  [1012] v.std_bias  1152  F32  1152 el
+ *  [1013] v.std_scale  1152  F32  1152 el
+ */
+
+/* === Anomaly Scan (17971742848 bytes tensor data) ===
+ *  LOW ENTROPY at +0x11e56000: 22/256 unique bytes  00 00 04 42 00 00 02 42 00 00 06 42 00 00 05 42 ...
+ *  LOW ENTROPY at +0x11e57000: 22/256 unique bytes  00 00 02 42 00 00 03 42 00 00 06 42 00 00 01 42 ...
+ *  LOW ENTROPY at +0x35190000: 22/256 unique bytes  00 00 07 42 00 00 04 42 00 00 fb 41 00 00 f5 41 ...
+ *  LOW ENTROPY at +0x35191000: 22/256 unique bytes  00 00 06 42 00 00 04 42 00 00 f9 41 00 00 f6 41 ...
+ *  LOW ENTROPY at +0x584ca000: 22/256 unique bytes  00 00 01 42 00 00 fa 41 00 00 04 42 00 00 f9 41 ...
+ *  LOW ENTROPY at +0x584cb000: 22/256 unique bytes  00 00 04 42 00 00 06 42 00 00 ff 41 00 00 f4 41 ...
+ *  LOW ENTROPY at +0x75b24000: 22/256 unique bytes  00 00 fb 41 00 00 f9 41 00 00 f8 41 00 00 f8 41 ...
+ *  LOW ENTROPY at +0x9317d000: 22/256 unique bytes  00 00 f7 41 00 00 f4 41 00 00 06 42 00 00 fa 41 ...
+ *  LOW ENTROPY at +0x9317e000: 22/256 unique bytes  00 00 ff 41 00 00 02 42 00 00 03 42 00 00 04 42 ...
+ *  LOW ENTROPY at +0xb6b08000: 22/256 unique bytes  00 00 05 42 00 00 06 42 00 00 ff 41 00 00 00 42 ...
+ *  LOW ENTROPY at +0xb6b09000: 22/256 unique bytes  00 00 01 42 00 00 f7 41 00 00 06 42 00 00 fa 41 ...
+ *  LOW ENTROPY at +0xd4162000: 22/256 unique bytes  00 00 fe 41 00 00 fb 41 00 00 f4 41 00 00 02 42 ...
+ *  LOW ENTROPY at +0xf1650000: 22/256 unique bytes  00 00 07 42 00 00 02 42 00 00 05 42 00 00 f4 41 ...
+ *  LOW ENTROPY at +0xf1651000: 22/256 unique bytes  00 00 fc 41 00 00 06 42 00 00 00 42 00 00 f4 41 ...
+ *  LOW ENTROPY at +0x11481f000: 22/256 unique bytes  00 00 f6 41 00 00 01 42 00 00 04 42 00 00 02 42 ...
+ *  LOW ENTROPY at +0x114820000: 22/256 unique bytes  00 00 f9 41 00 00 01 42 00 00 ff 41 00 00 02 42 ...
+ *  LOW ENTROPY at +0x131e78000: 22/256 unique bytes  00 00 06 42 00 00 02 42 00 00 05 42 00 00 00 42 ...
+ *  LOW ENTROPY at +0x131e79000: 22/256 unique bytes  00 00 fc 41 00 00 04 42 00 00 04 42 00 00 03 42 ...
+ *  LOW ENTROPY at +0x14f367000: 22/256 unique bytes  00 00 ff 41 00 00 fe 41 00 00 f5 41 00 00 06 42 ...
+ *  LOW ENTROPY at +0x172cf2000: 22/256 unique bytes  00 00 06 42 00 00 04 42 00 00 f7 41 00 00 fc 41 ...
+ *  LOW ENTROPY at +0x172cf3000: 22/256 unique bytes  00 00 f5 41 00 00 fa 41 00 00 f7 41 00 00 f5 41 ...
+ *  (truncated)
+ *  STRING at +0x7f9 (12 ch): "i}nGUDY5!RoK"
+ *  STRING at +0x21ad (12 ch): "(6~[lB5EtqH%"
+ *  STRING at +0x2458 (12 ch): "vI_J{kvGiDhY"
+ *  STRING at +0x33f6 (14 ch): "1)?]Xk?s#Da&rP"
+ *  STRING at +0x5f5c (13 ch): "zsi(.&NpMrStl"
+ *  STRING at +0x8fbf (13 ch): "yC"vuRayS`XDw"
+ *  STRING at +0xa83e (12 ch): ".6m(?!883Z{)"
+ *  STRING at +0x10d58 (13 ch): "x[ejG'}EG4SZF"
+ *  STRING at +0x1899d (13 ch): "zpEz>+dY<Mfz8"
+ *  STRING at +0x19eb7 (12 ch): "j'I_jtkE~r{s"
+ *  STRING at +0x1a2ef (16 ch): "c4]%F/Gs*jeB&"%:"
+ *  STRING at +0x1a536 (12 ch): "sIOXv3wDiLG7"
+ *  STRING at +0x1ae17 (18 ch): "k3hGG3jgY$ShR5pU#)"
+ *  STRING at +0x1b3c1 (12 ch): "_6z99JwUhXE`"
+ *  STRING at +0x1b417 (12 ch): "p8,_F'xeIwxw"
+ *  STRING at +0x1e76d (14 ch): "mPa:ZP:Zg<5f|>"
+ *  STRING at +0x21b5e (14 ch): "e'MFSVssS6qvZ^"
+ *  STRING at +0x23176 (12 ch): "*'US)/3'LktS"
+ *  STRING at +0x2333f (13 ch): "N[ZlcMXGxIyJC"
+ *  STRING at +0x23f56 (12 ch): ":`vwG3gBhEAe"
+ *  STRING at +0x2414f (12 ch): "xv5:Bf)l|U7f"
+ *  STRING at +0x24d26 (12 ch): "e9x4uj[~Hy(7"
+ *  STRING at +0x26500 (12 ch): "(#HDxcF1YEVP"
+ *  STRING at +0x2a18c (12 ch): "r}utRp[L6Ckv"
+ *  STRING at +0x2aca3 (12 ch): "['tw'ed[W5XI"
+ *  STRING at +0x2ec33 (21 ch): "*Gf<fp@fgaY*gu1zo"Zdr"
+ *  STRING at +0x2f59a (13 ch): "+SPJ@e87CfeAw"
+ *  STRING at +0x3185b (17 ch): "8(43E>D"%3#qTV&X`"
+ *  STRING at +0x3254e (14 ch): "V7iJI&wi}'E)mw"
+ *  STRING at +0x35c70 (12 ch): "SIb2[SJ4Ce8<"
+ *  STRING at +0x36378 (13 ch): "tTZTuZ70veh[p"
+ *  (truncated)
+ *  MATH CONST at +0x5cdcc: 1.41425633 ~ sqrt2
+ *  MATH CONST at +0xd8b7a4: 3.14152789 ~ pi
+ *  MATH CONST at +0xfaaa80: -1.41414905 ~ -sqrt2
+ *  MATH CONST at +0x1141434: -2.71830726 ~ -e
+ *  MATH CONST at +0x1383868: -1.61804318 ~ -phi
+ *  MATH CONST at +0x13a3c58: 0.69314492 ~ ln2
+ *  MATH CONST at +0x13a838c: -1.41424823 ~ -sqrt2
+ *  MATH CONST at +0x13d140c: 0.69312900 ~ ln2
+ *  MATH CONST at +0x149c034: -2.71820140 ~ -e
+ *  MATH CONST at +0x15ac36c: 3.14160538 ~ pi
+ *  MATH CONST at +0x165a5d4: -3.14162850 ~ -pi
+ *  MATH CONST at +0x16a84bc: 3.14161277 ~ pi
+ *  MATH CONST at +0x1764ce0: 1.41418827 ~ sqrt2
+ *  MATH CONST at +0x1a01194: -3.14161491 ~ -pi
+ *  MATH CONST at +0x1a80b38: 1.41418684 ~ sqrt2
+ *  MATH CONST at +0x1aa3344: -2.71825767 ~ -e
+ *  MATH CONST at +0x1ada044: 0.69317168 ~ ln2
+ *  MATH CONST at +0x1af1de0: 1.61794782 ~ phi
+ *  MATH CONST at +0x1bc1154: -1.61795568 ~ -phi
+ *  MATH CONST at +0x1d6f334: 2.71831203 ~ e
+ *  MATH CONST at +0x1da0e78: -1.61807323 ~ -phi
+ *  MATH CONST at +0x1ed1828: -3.14158058 ~ -pi
+ *  MATH CONST at +0x2061874: -3.14160895 ~ -pi
+ *  MATH CONST at +0x20b6344: 1.61809278 ~ phi
+ *  MATH CONST at +0x2168b34: 1.41429126 ~ sqrt2
+ *  MATH CONST at +0x21697b0: -0.69321114 ~ -ln2
+ *  MATH CONST at +0x22b8114: 1.41420949 ~ sqrt2
+ *  MATH CONST at +0x23cde9c: 2.71832991 ~ e
+ *  MATH CONST at +0x267e234: 3.14162683 ~ pi
+ *  MATH CONST at +0x26a4270: -1.41421735 ~ -sqrt2
+ *  MATH CONST at +0x26cb08c: -3.14161062 ~ -pi
+ *  (truncated)
+ *
+ *  === Frequency Analysis ===
+ *  Byte freq (top 10, 190MB sample):
+ *    0x81: 1.39%
+ *    0x7f: 1.39%
+ *    0x11: 1.37%
+ *    0x12: 1.36%
+ *    0x13: 1.04%
+ *    0x10: 1.00%
+ *    0x14: 0.94%
+ *    0x08: 0.71%
+ *    0x04: 0.71%
+ *    0xff: 0.70%
+ *  Nibble freq (4-bit quant values):
+ *     0: 8.50%
+ *     1: 9.97%
+ *     2: 7.23%
+ *     3: 6.24%
+ *     4: 5.52%
+ *     5: 4.87%
+ *     6: 4.44%
+ *     7: 4.74%
+ *     8: 4.72%
+ *     9: 4.40%
+ *    10: 4.82%
+ *    11: 5.31%
+ *    12: 5.95%
+ *    13: 6.78%
+ *    14: 7.62%
+ *    15: 8.87%
+ *  Shannon entropy: 7.7560 bits/byte (max 8.0)
+ *  Zero bytes: 0.68%
+ *  Q4_K scales (11111112 sampled): mean=3102.2712 min=0.000000 max=65504.00 near-zero(<.001)=26.0%
+ *  Byte pair freq (top 10):
+ *    0412: 0.056%
+ *    fc11: 0.056%
+ *    f411: 0.056%
+ *    e411: 0.056%
+ *    0c12: 0.055%
+ *    dc11: 0.055%
+ *    ec11: 0.055%
+ *    1412: 0.055%
+ *    1c12: 0.054%
+ *    d411: 0.054%
+ *
+ *  Summary: 21 low-entropy, 31 strings, 31 math constants, 0 zero regions
+ */
