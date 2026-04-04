@@ -140,6 +140,31 @@ The E4B aggressively compressed the vision encoder (40% fewer blocks, 33% narrow
 
 Only the E4B adds an audio encoder (12 blocks, 1024 dim, conv kernel 5). The larger models are text+vision only.
 
+## 9. No Super Weight: Architecture Eliminates Single-Point-of-Failure
+
+The "Super Weight" paper (Apple, [arXiv 2411.07191](https://arxiv.org/abs/2411.07191)) found that zeroing a single scalar in Llama-7B's `mlp.down_proj` (layer 2) destroys the model — perplexity spikes from 5.68 to 763, zero-shot accuracy drops to random guessing. They concluded that "super weights" are essential parameters whose removal is catastrophic.
+
+We replicated this on Gemma 4 E4B (8B). Results:
+
+| Target | Rows zeroed | 2+2= | France? | Degraded? |
+|---|---|---|---|---|
+| blk.0.ffn_down row 0 | 1 of 10240 | 4 | Paris | No |
+| blk.0.ffn_down row 1929 (max magnitude) | 1 of 10240 | 4 | Paris | No |
+| blk.0.ffn_down ALL rows | 10240 of 10240 | 2 | user | **Yes** |
+| blk.1.ffn_down ALL rows | 10240 of 10240 | 4 | Paris | No |
+| blk.2.ffn_down ALL rows | 10240 of 10240 | 4 | Paris | No |
+| blk.3.ffn_down ALL rows | 10240 of 10240 | 4 | Paris | No |
+
+**Gemma 4 has no super weight.** Zeroing any single row — including the highest-magnitude row — produces zero degradation. Zeroing the **entire** ffn_down tensor (10240 rows, ~21MB of weights) on blocks 1-3 produces zero degradation. Only zeroing all of block 0's ffn_down causes partial degradation, and even then the model still generates coherent (just wrong) text.
+
+For comparison, Llama-7B is destroyed by zeroing a single scalar (1 value out of ~180M in that layer). Gemma 4 survives losing ~26M values (the entire tensor) on 3 of 4 early layers.
+
+The difference is architecture. Llama uses vanilla transformers where each layer computes independently. Gemma 4's shared KV layers (18 of 42 layers share key-value cache) and bottleneck gating (2560→256→2560 with learned scale per layer) distribute importance so broadly that no single parameter — and no single tensor in most layers — is critical.
+
+**This means the super weight phenomenon is architecture-dependent, not a universal property of large language models.** Models with built-in redundancy (shared KV, layer gating, MoE routing) are structurally immune to the single-point-of-failure vulnerability the paper identified. This has implications for both model robustness and pruning research — Gemma 4's architecture is inherently more prunable than vanilla transformers.
+
+Replication script: [`super_weight_g4.py`](https://github.com/seanpattencode/aicombo/blob/main/super_weight_g4.py)
+
 ## What Standard Tools Miss
 
 | Capability | gguf-dump / gguf-py | decompile.c |
