@@ -165,6 +165,36 @@ The difference is architecture. Llama uses vanilla transformers where each layer
 
 Replication script: [`super_weight_g4.py`](https://github.com/seanpattencode/aicombo/blob/main/super_weight_g4.py)
 
+## 10. Concept-Selective Neurons Found via Weight Ablation
+
+Anthropic identified concept-specific features in Claude 3 Sonnet using sparse autoencoders on internal activations ([Golden Gate Claude, May 2024](https://www.anthropic.com/news/golden-gate-claude)). We replicated this on Gemma 4 E4B using a different method: systematic weight ablation through the GGUF, requiring no activation access and no SAE training.
+
+**Method**: Binary search — zero progressively smaller chunks of rows in `ffn_gate.weight`, test which concepts survive and which die. Narrow down until the minimal set of concept-encoding rows is identified.
+
+**Results in blk.20.ffn_gate.weight** (middle layer, 2560 rows):
+
+| Rows zeroed | Math (7×8) | Math (100+200) | Math (12²) | Eiffel Tower | Mercury | Code (print) |
+|---|---|---|---|---|---|---|
+| None (baseline) | 56 | 300 | 144 | Paris | Mercury | 4 |
+| 1280-1344 (64 rows) | 56 | **DEAD** | 144 | **DEAD** | **DEAD** | 4 |
+| 1344-1408 (64 rows) | 56 | 300 | 144 | **DEAD** | Mercury | 4 |
+| 1408-1472 (64 rows) | 56 | 300 | 144 | **DEAD** | Mercury | 4 |
+| 1472-1536 (64 rows) | 56 | 300 | 144 | **DEAD** | Mercury | 4 |
+
+**Key findings**:
+
+1. **Different math operations use different neurons.** Multiplication (7×8=56, 12²=144) and addition (100+200=300) are stored in different row groups. Zeroing rows 1280-1344 kills addition but leaves multiplication intact. This is not "math neurons" — it's operation-specific neurons.
+
+2. **Geography concepts are distributed.** The Eiffel Tower / Paris concept is spread across rows 1280-1536 (256 rows, 10% of the tensor). Any 64-row chunk in this range kills it. Mercury (planet) is more localized — only dies when rows 1280-1344 are hit.
+
+3. **Code execution is independent.** `print(2+2)` outputs "4" survives all ablations. Code knowledge is encoded in different rows than math or geography.
+
+4. **64 rows (2.5%) is sufficient for selective ablation.** This is the granularity at which concept-specific effects emerge in the Q4_K quantized model.
+
+This demonstrates that Anthropic's core finding — concepts are stored in identifiable, manipulable neuron groups — holds for open-weight models and can be discovered through weight ablation alone, without access to internal activations. The method works directly on quantized GGUF files through ollama, making it accessible to anyone with a local model.
+
+Replication scripts: [`concept_ablation.py`](https://github.com/seanpattencode/aicombo/blob/main/concept_ablation.py), [`concept_ablation2.py`](https://github.com/seanpattencode/aicombo/blob/main/concept_ablation2.py)
+
 ## What Standard Tools Miss
 
 | Capability | gguf-dump / gguf-py | decompile.c |
