@@ -33,7 +33,7 @@ Pre-generated results are in `results/`.
 | Embedding | 2560 | 2560 | 2816 | 5376 |
 | FFN | 10240 | 10240 | 2112+experts | 21504 |
 | Context | 131K | 131K | 262K | 262K |
-| License | Apache 2.0 | Apache 2.0 | Apache 2.0 | Apache 2.0 |
+| License | Gemma Terms | Apache 2.0 | Apache 2.0 | Apache 2.0 |
 
 ## Key Findings
 
