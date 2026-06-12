@@ -201,6 +201,32 @@ Zeroing 2.5% of a tensor preferentially degrades addition (~39%) over multiplica
 
 Scripts: [`concept_ablation.py`](https://github.com/seanpattencode/aicombo/blob/main/concept_ablation.py), [`concept_ablation2.py`](https://github.com/seanpattencode/aicombo/blob/main/concept_ablation2.py), [`concept_ablation3.py`](https://github.com/seanpattencode/aicombo/blob/main/concept_ablation3.py)
 
+### 12. DiffusionGemma: Same Backbone, Bidirectional — Training Objective Visible in the Weights
+
+DiffusionGemma 26B-A4B (June 2026) is the Gemma 4 26B MoE backbone with a diffusion head. The decompile confirms the backbone is *identical* (block_count 30, embedding 2816, 128 experts / 8 active, expert_ff 704, ctx 262144, `final_logit_softcapping=30`) and isolates exactly what diffusion training changed:
+
+| Delta | Evidence in dump | Meaning |
+|---|---|---|
+| Bidirectional attention | `attention.causal = false` | The base is causal; this attends both directions over the canvas — enables parallel denoising |
+| Fixed canvas | `diffusion.canvas_length = 256` | Denoises 256 tokens per step as a block |
+| Self-conditioning head | new `self_cond_{down,gate,up,pre_norm}` tensors | Feeds its own prior prediction back each step (~18M params) |
+| Mask = noise | `mask_token_id = 4` now load-bearing | Diffusion denoises from masked tokens |
+| Partial rename | `enc_layer_output_scale` (blk.28/29 still `layer_output_scale`) | Encoder framing; half-done rename + name `Dg_Rc0P1_Patched` ⇒ patched over the AR checkpoint |
+| Vision stripped | zero `vision.*` metadata, 692 tensors vs 1014 | This GGUF is text-only despite the card claiming image input |
+
+**The objective is measurable in the raw weight statistics** — same backbone, different generation paradigm:
+
+| | Gemma 4 26B (autoregressive) | DiffusionGemma 26B |
+|---|---|---|
+| Shannon entropy (bits/byte) | 7.756 | **7.939** |
+| Nibble distribution | U-shaped (valley ~4.4% mid, spikes 0-1/14-15) | **flat / near-uniform (~7-8%)** |
+| Near-zero Q4_K scales | 26.0% | **21.1%** |
+| Math constants (pi/e/√2/ln2/φ) | 31 | 31 (unchanged) |
+
+Bidirectional denoising raises weight entropy and flattens the MoE nibble distribution — it uses expert capacity more uniformly than sparse causal routing, smoothing out the autoregressive model's "dormant-or-saturated expert" signature. The 31 embedded math constants survive *exactly*, confirming they live in the shared backbone, untouched by the new objective.
+
+Result: [`results/diffusiongemma_26b.txt`](results/diffusiongemma_26b.txt). Runner: [`aicombo`](https://github.com/seanpattencode/aicombo) (`diffusiongemma.py` — self-installing llama.cpp diffusion build + Q4_K_M GGUF).
+
 ---
 
 ## What Standard Tools Miss

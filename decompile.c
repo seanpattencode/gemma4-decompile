@@ -9,6 +9,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/mman.h>
 #ifdef __APPLE__
 #include <mach-o/loader.h>
 #include <mach-o/nlist.h>
@@ -86,7 +89,7 @@ static void resolve_fat(void) {
             uint32_t off = sw ? __builtin_bswap32(fa[i].offset) : fa[i].offset;
             uint32_t sz = sw ? __builtin_bswap32(fa[i].size) : fa[i].size;
             uint8_t *s = malloc(sz); memcpy(s, bin + off, sz);
-            free(bin); bin = s; binsz = sz; return;
+            munmap(bin, binsz); bin = s; binsz = sz; return;
         }
     }
     fprintf(stderr, "No matching arch in fat binary\n"); exit(1);
@@ -493,14 +496,13 @@ static int analyze_gguf(void) {
 
 int main(int argc, char **argv) {
     if (argc < 2) { fprintf(stderr, "Usage: %s <binary>\n", argv[0]); return 1; }
-    FILE *f = fopen(argv[1], "rb");
-    if (!f) { perror(argv[1]); return 1; }
-    fseek(f, 0, SEEK_END); binsz = ftell(f); rewind(f);
-    bin = malloc(binsz);
-    if (!bin || fread(bin, 1, binsz, f) != (size_t)binsz) { fprintf(stderr, "read error\n"); return 1; }
-    fclose(f);
+    int fd = open(argv[1], O_RDONLY);
+    if (fd < 0) { perror(argv[1]); return 1; }
+    binsz = lseek(fd, 0, SEEK_END);
+    bin = mmap(0, binsz, PROT_READ, MAP_PRIVATE, fd, 0);  // demand-paged: scans >RAM files without OOM
+    if (bin == MAP_FAILED) { perror("mmap"); return 1; }
 
-    if (analyze_gguf()) { free(bin); return 0; }
+    if (analyze_gguf()) return 0;
 
 #ifdef __APPLE__
     resolve_fat();
@@ -620,6 +622,6 @@ int main(int argc, char **argv) {
     printf("  close(f);\n");
     printf("  execve(bp,v,environ);return 1;\n}\n");
 
-    free(bin); free(syms);
+    free(syms);
     return 0;
 }
