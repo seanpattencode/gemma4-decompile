@@ -1,0 +1,135 @@
+
+=== /home/seanpatten/.cache/huggingface/hub/models--unsloth--diffusiongemma-26B-A4B-it-GGUF/blobs/d2ca2c032ebfb23cf2d1794a3465e615c7545634d46b3c30652a26d8b07c4ad3  (41 weight matrices sampled) ===
+tensor                    shape          stable_rank  spec_entropy   alpha
+blk.0.attn_k.weight       (2048, 2048)         109.0         0.915    3.25
+blk.0.attn_output.weight  (2048, 2816)          76.0         0.925    3.16
+blk.0.attn_q.weight       (2048, 4096)         101.4         0.950    3.78
+blk.0.attn_v.weight       (2048, 2048)         153.7         0.923    3.43
+blk.0.ffn_down.weight     (2048, 2816)          40.3         0.913    3.30
+blk.0.ffn_gate.weight     (2048, 2112)         261.7         0.926    3.38
+blk.0.ffn_up.weight       (2048, 2112)         254.5         0.927    3.45
+blk.12.attn_k.weight      (2048, 2048)         295.3         0.913    3.06
+blk.12.attn_output.weight (2048, 2816)         147.7         0.936    3.43
+blk.12.attn_q.weight      (2048, 4096)         212.6         0.946    3.61
+blk.12.attn_v.weight      (2048, 2048)         157.5         0.929    3.70
+blk.12.ffn_down.weight    (2048, 2816)         124.4         0.934    3.37
+blk.12.ffn_gate.weight    (2048, 2112)         167.4         0.914    3.00
+blk.12.ffn_up.weight      (2048, 2112)         284.3         0.924    3.31
+blk.18.attn_k.weight      (2048, 2048)         313.8         0.913    3.01
+blk.18.attn_output.weight (2048, 2816)         130.3         0.944    3.91
+blk.18.attn_q.weight      (2048, 4096)         135.5         0.941    3.39
+blk.18.attn_v.weight      (2048, 2048)          67.9         0.922    3.59
+blk.18.ffn_down.weight    (2048, 2816)          86.5         0.930    3.25
+blk.18.ffn_gate.weight    (2048, 2112)         158.0         0.915    3.03
+blk.18.ffn_up.weight      (2048, 2112)         342.9         0.926    3.39
+blk.24.attn_k.weight      (2048, 2048)         279.9         0.919    3.21
+blk.24.attn_output.weight (2048, 2816)         202.0         0.945    3.94
+blk.24.attn_q.weight      (2048, 4096)         159.0         0.946    3.63
+blk.24.attn_v.weight      (2048, 2048)          96.7         0.927    3.74
+blk.24.ffn_down.weight    (2048, 2816)         125.3         0.939    3.61
+blk.24.ffn_gate.weight    (2048, 2112)         138.5         0.915    3.12
+blk.24.ffn_up.weight      (2048, 2112)         150.0         0.923    3.36
+blk.29.attn_k.weight      (2048, 1024)         212.0         0.869    3.29
+blk.29.attn_output.weight (2048, 2816)         103.9         0.929    3.25
+blk.29.attn_q.weight      (2048, 8192)         234.6         0.956    3.28
+blk.29.ffn_down.weight    (2048, 2816)          20.0         0.864    2.94
+blk.29.ffn_gate.weight    (2048, 2112)          18.8         0.814    2.54
+blk.29.ffn_up.weight      (2048, 2112)          27.2         0.854    2.61
+blk.6.attn_k.weight       (2048, 2048)         208.7         0.923    3.39
+blk.6.attn_output.weight  (2048, 2816)         217.0         0.945    3.90
+blk.6.attn_q.weight       (2048, 4096)         193.3         0.953    3.83
+blk.6.attn_v.weight       (2048, 2048)         166.7         0.931    3.84
+blk.6.ffn_down.weight     (2048, 2816)          50.6         0.924    3.53
+blk.6.ffn_gate.weight     (2048, 2112)         256.2         0.918    3.06
+blk.6.ffn_up.weight       (2048, 2112)         287.8         0.927    3.44
+  -> mean alpha 3.373  (lower = heavier-tailed / better-trained, correlational)
+
+=== /usr/share/ollama/.ollama/models/blobs/sha256-7121486771cbfe218851513210c40b35dbdee93ab1ef43fe36283c883980f0df  (41 weight matrices sampled) ===
+tensor                    shape          stable_rank  spec_entropy   alpha
+blk.0.attn_k.weight       (2048, 2048)         129.2         0.918    3.30
+blk.0.attn_output.weight  (2048, 2816)          81.2         0.926    3.13
+blk.0.attn_q.weight       (2048, 4096)          99.6         0.950    3.78
+blk.0.attn_v.weight       (2048, 2048)         158.0         0.923    3.43
+blk.0.ffn_down.weight     (2048, 2816)          36.3         0.910    3.33
+blk.0.ffn_gate.weight     (2048, 2112)         306.6         0.926    3.40
+blk.0.ffn_up.weight       (2048, 2112)         242.7         0.927    3.49
+blk.12.attn_k.weight      (2048, 2048)         295.7         0.911    3.02
+blk.12.attn_output.weight (2048, 2816)         148.8         0.934    3.39
+blk.12.attn_q.weight      (2048, 4096)         189.5         0.943    3.56
+blk.12.attn_v.weight      (2048, 2048)         159.7         0.928    3.66
+blk.12.ffn_down.weight    (2048, 2816)         132.9         0.934    3.35
+blk.12.ffn_gate.weight    (2048, 2112)         176.7         0.912    2.97
+blk.12.ffn_up.weight      (2048, 2112)         265.5         0.923    3.28
+blk.18.attn_k.weight      (2048, 2048)         312.6         0.911    2.96
+blk.18.attn_output.weight (2048, 2816)         129.9         0.944    3.89
+blk.18.attn_q.weight      (2048, 4096)         126.8         0.939    3.37
+blk.18.attn_v.weight      (2048, 2048)          62.4         0.921    3.58
+blk.18.ffn_down.weight    (2048, 2816)          90.8         0.931    3.26
+blk.18.ffn_gate.weight    (2048, 2112)         207.0         0.915    3.02
+blk.18.ffn_up.weight      (2048, 2112)         338.9         0.926    3.40
+blk.24.attn_k.weight      (2048, 2048)         297.8         0.918    3.23
+blk.24.attn_output.weight (2048, 2816)         250.8         0.946    3.99
+blk.24.attn_q.weight      (2048, 4096)         145.4         0.944    3.63
+blk.24.attn_v.weight      (2048, 2048)         115.9         0.928    3.76
+blk.24.ffn_down.weight    (2048, 2816)         117.3         0.938    3.62
+blk.24.ffn_gate.weight    (2048, 2112)         144.9         0.916    3.15
+blk.24.ffn_up.weight      (2048, 2112)         168.5         0.924    3.39
+blk.29.attn_k.weight      (2048, 1024)         226.5         0.869    3.30
+blk.29.attn_output.weight (2048, 2816)         195.8         0.931    3.29
+blk.29.attn_q.weight      (2048, 8192)         217.6         0.954    3.31
+blk.29.ffn_down.weight    (2048, 2816)          21.9         0.877    3.03
+blk.29.ffn_gate.weight    (2048, 2112)          33.6         0.868    2.71
+blk.29.ffn_up.weight      (2048, 2112)          44.2         0.889    2.80
+blk.6.attn_k.weight       (2048, 2048)         196.1         0.922    3.37
+blk.6.attn_output.weight  (2048, 2816)         239.7         0.945    3.89
+blk.6.attn_q.weight       (2048, 4096)         175.2         0.951    3.75
+blk.6.attn_v.weight       (2048, 2048)         162.0         0.931    3.84
+blk.6.ffn_down.weight     (2048, 2816)          50.2         0.923    3.52
+blk.6.ffn_gate.weight     (2048, 2112)         239.5         0.917    3.03
+blk.6.ffn_up.weight       (2048, 2112)         280.0         0.926    3.42
+  -> mean alpha 3.380  (lower = heavier-tailed / better-trained, correlational)
+
+=== diversity: d2ca2c032ebfb23cf2d1794a3465e615c7545634d46b3c30652a26d8b07c4ad3  vs  sha256-7121486771cbfe218851513210c40b35dbdee93ab1ef43fe36283c883980f0df  (41 shared tensors) ===
+tensor                      subspace_overlap  diversity
+blk.0.attn_k.weight                    0.894      0.106
+blk.0.attn_output.weight               0.861      0.139
+blk.0.attn_q.weight                    0.866      0.134
+blk.0.attn_v.weight                    0.868      0.132
+blk.0.ffn_down.weight                  0.873      0.127
+blk.0.ffn_gate.weight                  0.799      0.201
+blk.0.ffn_up.weight                    0.707      0.293
+blk.12.attn_k.weight                   0.879      0.121
+blk.12.attn_output.weight              0.989      0.011
+blk.12.attn_q.weight                   0.945      0.055
+blk.12.attn_v.weight                   0.906      0.094
+blk.12.ffn_down.weight                 0.964      0.036
+blk.12.ffn_gate.weight                 0.890      0.110
+blk.12.ffn_up.weight                   0.892      0.108
+blk.18.attn_k.weight                   0.807      0.193
+blk.18.attn_output.weight              0.930      0.070
+blk.18.attn_q.weight                   0.923      0.077
+blk.18.attn_v.weight                   0.901      0.099
+blk.18.ffn_down.weight                 0.896      0.104
+blk.18.ffn_gate.weight                 0.861      0.139
+blk.18.ffn_up.weight                   0.821      0.179
+blk.24.attn_k.weight                   0.745      0.255
+blk.24.attn_output.weight              0.784      0.216
+blk.24.attn_q.weight                   0.886      0.114
+blk.24.attn_v.weight                   0.862      0.138
+blk.24.ffn_down.weight                 0.863      0.137
+blk.24.ffn_gate.weight                 0.877      0.123
+blk.24.ffn_up.weight                   0.846      0.154
+blk.29.attn_k.weight                   0.756      0.244
+blk.29.attn_output.weight              0.852      0.148
+blk.29.attn_q.weight                   0.925      0.075
+blk.29.ffn_down.weight                 0.838      0.162
+blk.29.ffn_gate.weight                 0.792      0.208
+blk.29.ffn_up.weight                   0.719      0.281
+blk.6.attn_k.weight                    0.862      0.138
+blk.6.attn_output.weight               0.977      0.023
+blk.6.attn_q.weight                    0.925      0.075
+blk.6.attn_v.weight                    0.909      0.091
+blk.6.ffn_down.weight                  0.919      0.081
+blk.6.ffn_gate.weight                  0.895      0.105
+blk.6.ffn_up.weight                    0.906      0.094
+  -> mean diversity 0.131  (0 = identical subspaces, 1 = orthogonal)

@@ -227,6 +227,21 @@ Bidirectional denoising raises weight entropy and flattens the MoE nibble distri
 
 Result: [`results/diffusiongemma_26b.txt`](results/diffusiongemma_26b.txt). Runner: [`aicombo`](https://github.com/seanpattencode/aicombo) (`diffusiongemma.py` — self-installing llama.cpp diffusion build + Q4_K_M GGUF).
 
+### 13. Spectral Fingerprint: Measuring the Subspace Rotation Directly ([`spectral.py`](spectral.py))
+
+The byte stats above are a *shadow* of a change in the weight matrices. [`spectral.py`](spectral.py) dequantizes each 2D weight and does the actual linear algebra — per-tensor **stable rank**, **spectral entropy**, and the **power-law tail exponent α** (Martin & Mahoney, [*Predicting trends in the quality of state-of-the-art neural networks without test data*](https://www.nature.com/articles/s41467-021-24025-8), Nat. Comm. 2021), plus a two-model **subspace-diversity** compare. Self-installing: `./spectral.py model.gguf` or `./spectral.py A.gguf B.gguf`.
+
+Run on DiffusionGemma vs autoregressive Gemma 4 26B (same backbone → 41 identically-shaped shared tensors):
+
+| | DiffusionGemma | AR Gemma 4 26B |
+|---|---|---|
+| mean α (Hill tail exponent, well-trained ≈ 2–4) | 3.37 | 3.38 |
+| mean subspace diversity (1 − overlap) | **0.131** (vs AR) | — |
+
+Two findings that fit together. First, **α is indistinguishable** (3.37 vs 3.38, a difference well inside per-layer noise): diffusion fine-tuning did not change the spectral quality signature — the weights stayed equally well-conditioned. Second, the **subspaces still rotated ~13%** off the AR base, *structured*: FFN-input projections (`ffn_up`/`ffn_gate`) move most (0.20–0.29), middle-layer `attn_output` barely moves (0.01–0.02). So the diffusion objective moved the weights to a *different but equally-trained region* of weight space — same spectral shape, rotated basis. That rotation is the direct measurement of the divergence the byte-entropy shift (7.756→7.939) only hinted at, and it makes DiffusionGemma a quantifiably **diverse ensemble member** despite the shared backbone (decorrelated structure concentrated in FFN-input and edge layers). Honest caveat: α is a correlational quality proxy and metrics use row-subsampled matrices — a screen, not ground truth.
+
+Result: [`results/spectral_diffusion_vs_ar.txt`](results/spectral_diffusion_vs_ar.txt).
+
 ---
 
 ## What Standard Tools Miss
@@ -249,9 +264,11 @@ Result: [`results/diffusiongemma_26b.txt`](results/diffusiongemma_26b.txt). Runn
 `decompile.c` is a single-file C decompiler (~600 lines) that handles:
 - **ELF x86-64**: instruction length decoder, disassembly, symbol resolution, compilable C output
 - **Mach-O ARM64/x86-64**: fat binary handling, segment/section parsing, disassembly
-- **GGUF**: metadata parsing, tensor manifest, anomaly scan (low-entropy, strings, math constants, zero regions), frequency analysis (byte/nibble/pair, entropy, Q4_K scale stats)
+- **GGUF**: metadata parsing, tensor manifest, anomaly scan (low-entropy, strings, math constants, zero regions), frequency analysis (byte/nibble/pair, entropy, Q4_K scale stats). `--fast` scans the first 1.5GB (~12× faster: 2.2s vs 27s on a 16.8GB file — the scan is I/O-bound, so reading less is the only real lever; mmap demand-paging keeps RAM flat).
 
-Build: `cc -O2 -o decompile decompile.c` — zero dependencies beyond libc.
+Build: `cc -O2 -o decompile decompile.c -lm` — zero dependencies beyond libc.
+
+`spectral.py` is the companion weight-matrix analyzer (dequantize → linear algebra): per-tensor stable rank / spectral entropy / power-law α, and a two-model singular-subspace **diversity** compare (see finding #13). Self-installing via `uv` (numpy + gguf). Pins OpenBLAS to one thread — counterintuitively ~50× faster than auto-threading on these small per-tensor SVDs.
 
 ## Reproduce
 

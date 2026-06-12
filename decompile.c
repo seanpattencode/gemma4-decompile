@@ -22,6 +22,7 @@
 
 static uint8_t *bin;
 static long binsz;
+static int fast;                 /* --fast: scan only the first ~1.5GB of tensor data */
 
 /* --- GGUF value skip/print --- */
 static uint8_t *gguf_skip(uint8_t *p, uint32_t t) {
@@ -382,6 +383,10 @@ static int analyze_gguf(void) {
     uint8_t *data = bin + ds;
 
     printf("/* === Anomaly Scan (%llu bytes tensor data) ===\n", (unsigned long long)dlen);
+    if (fast && dlen > 1500000000ULL) {           /* I/O-bound: scanning a prefix is ~10x faster */
+        printf(" *  [--fast: scanning first 1500MB of %lluMB]\n", (unsigned long long)(dlen>>20));
+        dlen = 1500000000ULL;
+    }
 
     /* unique byte values per 4K block (proxy for entropy) */
     int low_ent = 0;
@@ -495,9 +500,12 @@ static int analyze_gguf(void) {
 }
 
 int main(int argc, char **argv) {
-    if (argc < 2) { fprintf(stderr, "Usage: %s <binary>\n", argv[0]); return 1; }
-    int fd = open(argv[1], O_RDONLY);
-    if (fd < 0) { perror(argv[1]); return 1; }
+    if (argc < 2) { fprintf(stderr, "Usage: %s [--fast] <binary>\n", argv[0]); return 1; }
+    const char *path = NULL;
+    for (int i = 1; i < argc; i++) { if (!strcmp(argv[i], "--fast")) fast = 1; else path = argv[i]; }
+    if (!path) { fprintf(stderr, "Usage: %s [--fast] <binary>\n", argv[0]); return 1; }
+    int fd = open(path, O_RDONLY);
+    if (fd < 0) { perror(path); return 1; }
     binsz = lseek(fd, 0, SEEK_END);
     bin = mmap(0, binsz, PROT_READ, MAP_PRIVATE, fd, 0);  // demand-paged: scans >RAM files without OOM
     if (bin == MAP_FAILED) { perror("mmap"); return 1; }
